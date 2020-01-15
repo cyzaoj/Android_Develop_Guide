@@ -66,6 +66,15 @@ dependencies {
     implementation deps.androidx.constraintlayout
 
 
+    implementation deps.google.material
+    implementation deps.iconics.core
+    implementation deps.iconics.views
+
+    implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'
+
+    implementation deps.utils.timber
+
+
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junit_test_ext
     androidTestImplementation deps.test.androidx_test_espresso
