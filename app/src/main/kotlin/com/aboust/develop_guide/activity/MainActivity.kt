@@ -1,7 +1,8 @@
-package com.aboust.develop_guide
+package com.aboust.develop_guide.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aboust.develop_guide.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -55,6 +55,9 @@ dependencies {
     implementation deps.kotlin.coroutines_android
 
 
+    implementation deps.afollestad.assent
+    implementation deps.afollestad.recyclical
+
     implementation deps.androidx.appcompat
     implementation deps.androidx.core_ktx
     implementation deps.androidx.multidex
