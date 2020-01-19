@@ -3,10 +3,10 @@
 
     <!-- common -->
     <dimen name="line_spacing_extra">5dp</dimen>
-    <dimen name="text_size_title">20sp</dimen>
-    <dimen name="text_size_sub_title">16sp</dimen>
-    <dimen name="text_size_content">14sp</dimen>
-    <dimen name="text_size_small">12sp</dimen>
+    <dimen name="text_size_title">17sp</dimen>
+    <dimen name="text_size_sub_title">14sp</dimen>
+    <dimen name="text_size_content">13sp</dimen>
+    <dimen name="text_size_small">11sp</dimen>
     <dimen name="radius">4dp</dimen>
     <dimen name="logo_size">45dp</dimen>
 
@@ -24,8 +24,9 @@
     <dimen name="toolbar_spacing_horizontal">16dp</dimen>
     <dimen name="toolbar_title_left_margin">32dp</dimen>
     <dimen name="toolbar_icon_margin_horizontal">24dp</dimen>
-    <dimen name="toolbar_icon_size">24dp</dimen>
-    <dimen name="toolbar_text_size_title">20dp</dimen>
+    <dimen name="toolbar_icon_size">22dp</dimen>
+    <dimen name="toolbar_text_size_title">17sp</dimen>
+    <dimen name="toolbar_text_size_sub_title">15sp</dimen>
 
 
     <dimen name="dialog_width">280dp</dimen>

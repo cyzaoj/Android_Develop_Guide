@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Android_Develop_Guide</string>
+
+
+    <string name="notification">消息通知</string>
+    <string name="_default">默认</string>
 </resources>

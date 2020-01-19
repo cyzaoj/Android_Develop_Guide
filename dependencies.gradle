@@ -17,7 +17,7 @@ versions.paging = '2.1.1'
 versions.okhttp = '4.3.0'
 versions.retrofit2 = '2.7.1'
 versions.camerax = '1.0.0-alpha06'
-versions.okdownload = '1.0.7'
+//versions.okdownload = '1.0.7'
 ext.versions = versions
 
 
@@ -152,9 +152,12 @@ utils.fire_crasher = 'com.github.osama-raddad:FireCrasher:2.0.0'
 utils.xCrash = 'com.iqiyi.xcrash:xcrash-android-lib:2.4.9'
 utils.needs = 'com.github.skydoves:needs:1.0.8'
 
-utils.okdownload = "com.liulishuo.okdownload:okdownload:$versions.okdownload"
-utils.okdownload_sqlite = "com.liulishuo.okdownload:sqlite:$versions.okdownload"
-utils.okdownload_okhttp = "com.liulishuo.okdownload:okhttp:$versions.okdownload"
+utils.colorful =  'com.github.garretyoder:Colorful:2.3.4'
+
+
+//utils.okdownload = "com.liulishuo.okdownload:okdownload:$versions.okdownload"
+//utils.okdownload_sqlite = "com.liulishuo.okdownload:sqlite:$versions.okdownload"
+//utils.okdownload_okhttp = "com.liulishuo.okdownload:okhttp:$versions.okdownload"
 
 deps.utils = utils
 
