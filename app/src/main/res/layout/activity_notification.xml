@@ -34,5 +34,13 @@
             android:text="bigText"
             android:textSize="@dimen/text_size_content" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/notification_big_picture"
+            style="@style/AppCompatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="bigPicture"
+            android:textSize="@dimen/text_size_content" />
+
     </GridLayout>
 </LinearLayout>

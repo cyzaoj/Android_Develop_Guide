@@ -29,7 +29,7 @@ class MainApplication : MultiDexApplication() {
                 icon = R.mipmap.ic_launcher
                 name = getString(R.string.app_name)
                 color = R.color.colorPrimary
-                showTimestamp = true
+                showWhen = true
             }
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         }

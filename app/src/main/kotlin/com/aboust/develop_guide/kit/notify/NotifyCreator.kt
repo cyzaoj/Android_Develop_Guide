@@ -9,13 +9,22 @@ import com.aboust.develop_guide.kit.notify.entities.RawNotification
 class NotifyCreator internal constructor(private val notify: Notify) {
 
     private var metadata = Payload.Metadata()
+    private var badge: Payload.Badge? = null
+    private var group: Payload.Group? = null
     private var header = Notify.configuration.header.copy()
     private var content: Payload.Content = Payload.Content.Default()
     private var actions: ArrayList<Action>? = null
     private var alerts: Payload.Alerts = Notify.configuration.alerting()
 
+    private var append: ((NotificationCompat.Builder) -> Unit?)? = null
+
     fun metadata(init: Payload.Metadata.() -> Unit): NotifyCreator {
         this.metadata.init()
+        return this
+    }
+
+    fun append(func: (NotificationCompat.Builder) -> Unit?): NotifyCreator {
+        this.append = func
         return this
     }
 
@@ -26,6 +35,16 @@ class NotifyCreator internal constructor(private val notify: Notify) {
 
     fun alerting(channel: NotifyChannel, init: Payload.Alerts.() -> Unit): NotifyCreator {
         this.alerts = this.alerts.copy(channel = channel).also(init)
+        return this
+    }
+
+    fun group(init: Payload.Group.() -> Unit): NotifyCreator {
+        this.group = Payload.Group().also(init)
+        return this
+    }
+
+    fun badge(init: Payload.Badge.() -> Unit): NotifyCreator {
+        this.badge = Payload.Badge().also(init)
         return this
     }
 
@@ -57,12 +76,12 @@ class NotifyCreator internal constructor(private val notify: Notify) {
 
 
     fun asBuilder(): NotificationCompat.Builder {
-        return notify.asBuilder(RawNotification(metadata, alerts, header, content, actions))
+        return notify.asBuilder(RawNotification(metadata, alerts, header, content, actions, null, badge))
     }
 
 
     fun show(id: Int? = null): Int = notify.show(id, asBuilder())
 
     fun cancel(id: Int) =
-        NotifyCompact.cancelNotification(Notify.configuration.notificationManager!!, id)
+            NotifyCompact.cancelNotification(Notify.configuration.notificationManager!!, id)
 }

@@ -20,17 +20,17 @@ class Notify private constructor(internal var context: Context) {
 
     init {
         this.context = context.applicationContext
-        if (null === configuration.notificationManager)
-            configuration.notificationManager =
-                context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (null === configuration.notificationManager) configuration.notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         NotificationHelper.createNotificationChannel(*configuration.channels.toTypedArray())
     }
 
     internal fun asBuilder(payload: RawNotification): NotificationCompat.Builder {
         return NotificationHelper.buildNotification(this, payload)
     }
+
     internal fun show(id: Int?, builder: NotificationCompat.Builder): Int {
-        return NotificationHelper.showNotification(Notify.configuration.notificationManager!!, id, builder)
+        return NotificationHelper.showNotification(configuration.notificationManager!!, id, builder)
     }
 
 }

@@ -10,6 +10,9 @@ import com.aboust.develop_guide.kit.notify.config.NO_LIGHTS
 
 /**
  * 通知通道
+ *
+ * https://developer.android.google.cn/training/notify-user/channels?hl=zh-cn
+ *
  */
 class NotifyChannel(val id: String?, val name: CharSequence?, @Importance val importance: Int) {
 
@@ -88,8 +91,8 @@ class NotifyChannel(val id: String?, val name: CharSequence?, @Importance val im
 
 
     fun sound(
-        sound: Uri?,
-        audioAttributes: AudioAttributes = AudioAttributes.Builder().build()
+            sound: Uri?,
+            audioAttributes: AudioAttributes = AudioAttributes.Builder().build()
     ): NotifyChannel {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel?.setSound(sound, audioAttributes)
