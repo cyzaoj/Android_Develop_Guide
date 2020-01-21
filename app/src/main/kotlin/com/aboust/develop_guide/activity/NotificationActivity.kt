@@ -34,6 +34,9 @@ class NotificationActivity : AppCompatActivity() {
                     .content {
                         title = "Default Notification"
                         text = "Default Notification !!!"
+                    }.group {
+                        key = "ttttt"
+                        summary = true
                     }
                     .show()
         }
@@ -44,9 +47,8 @@ class NotificationActivity : AppCompatActivity() {
                     .asBigText {
                         title = "This is a BigText"
                         text = "this is a bigText!!!"
-                        expandedText = "Mouthwatering deliciousness."
                         bigText =
-                                "this is a bigText!\nthis is a bigText!\nthis is a bigText!\nthis is a bigText!\nthis is a bigText!\n"
+                                "应用 NotificationCompat.BigTextStyle，以在通知的展开内容区域显示文本：添加一大段文本"
                     }
                     .show()
         }
@@ -58,8 +60,6 @@ class NotificationActivity : AppCompatActivity() {
                         picture = getBitmap(this@NotificationActivity, R.mipmap.ic_launcher)
                         title = "This is a BigPicture"
                         text = "this is a BigPicture!!!"
-                        expandedText = "Mouthwatering deliciousness."
-                    }.append {
                     }
                     .show()
         }

@@ -1,6 +1,7 @@
-package com.aboust.develop_guide.kit.notify
+package com.aboust.develop_guide.kit.notify.core
 
 import androidx.core.app.NotificationCompat
+import com.aboust.develop_guide.kit.notify.Notify
 import com.aboust.develop_guide.kit.notify.entities.NotifyChannel
 import com.aboust.develop_guide.kit.notify.entities.Payload
 import com.aboust.develop_guide.kit.notify.entities.RawNotification
@@ -8,25 +9,26 @@ import com.aboust.develop_guide.kit.notify.entities.RawNotification
 
 class NotifyCreator internal constructor(private val notify: Notify) {
 
-    private var metadata = Payload.Metadata()
-    private var badge: Payload.Badge? = null
-    private var group: Payload.Group? = null
+    private var metadata = Payload.Meta()
+    private var alerts: Payload.Alerts = Notify.configuration.alerting()
     private var header = Notify.configuration.header.copy()
     private var content: Payload.Content = Payload.Content.Default()
-    private var actions: ArrayList<Action>? = null
-    private var alerts: Payload.Alerts = Notify.configuration.alerting()
 
-    private var append: ((NotificationCompat.Builder) -> Unit?)? = null
+    private var actions: MutableList<Action>? = null
+    private var badge: Payload.Badge? = null
+    private var group: Payload.Group? = null
 
-    fun metadata(init: Payload.Metadata.() -> Unit): NotifyCreator {
+//    private var extend: ((NotificationCompat.Builder) -> Unit?)? = null
+
+    fun metadata(init: Payload.Meta.() -> Unit): NotifyCreator {
         this.metadata.init()
         return this
     }
 
-    fun append(func: (NotificationCompat.Builder) -> Unit?): NotifyCreator {
-        this.append = func
-        return this
-    }
+//    fun extend(extend: (NotificationCompat.Builder) -> Unit?): NotifyCreator {
+//        this.extend = extend
+//        return this
+//    }
 
     fun header(init: Payload.Header.() -> Unit): NotifyCreator {
         this.header.init()
@@ -76,12 +78,12 @@ class NotifyCreator internal constructor(private val notify: Notify) {
 
 
     fun asBuilder(): NotificationCompat.Builder {
-        return notify.asBuilder(RawNotification(metadata, alerts, header, content, actions, null, badge))
+        //        extend?.let { exec -> exec(builder) }
+        return notify.asBuilder(RawNotification(metadata, alerts, header, content, actions, group, badge))
     }
 
 
     fun show(id: Int? = null): Int = notify.show(id, asBuilder())
 
-    fun cancel(id: Int) =
-            NotifyCompact.cancelNotification(Notify.configuration.notificationManager!!, id)
+    fun cancel(id: Int) = NotifyCompact.cancelNotification(Notify.configuration.notificationManager!!, id)
 }

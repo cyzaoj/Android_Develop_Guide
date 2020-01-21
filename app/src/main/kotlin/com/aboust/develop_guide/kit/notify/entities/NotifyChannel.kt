@@ -4,9 +4,8 @@ import android.app.NotificationChannel
 import android.media.AudioAttributes
 import android.net.Uri
 import android.os.Build
-import androidx.core.app.NotificationCompat
-import com.aboust.develop_guide.kit.notify.config.Importance
-import com.aboust.develop_guide.kit.notify.config.NO_LIGHTS
+import com.aboust.develop_guide.kit.notify.Importance
+import com.aboust.develop_guide.kit.notify.NO_LIGHTS
 
 /**
  * 通知通道
@@ -90,9 +89,7 @@ class NotifyChannel(val id: String?, val name: CharSequence?, @Importance val im
     }
 
 
-    fun sound(
-            sound: Uri?,
-            audioAttributes: AudioAttributes = AudioAttributes.Builder().build()
+    fun sound(sound: Uri?, audioAttributes: AudioAttributes = AudioAttributes.Builder().build()
     ): NotifyChannel {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             notificationChannel?.setSound(sound, audioAttributes)

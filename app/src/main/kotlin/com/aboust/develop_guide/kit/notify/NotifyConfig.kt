@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.kit.notify.config
+package com.aboust.develop_guide.kit.notify
 
 import android.app.NotificationManager
 import com.aboust.develop_guide.kit.notify.entities.Payload

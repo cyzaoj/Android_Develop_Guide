@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.kit.notify
+package com.aboust.develop_guide.kit.notify.core
 
 import android.app.NotificationManager
 import android.content.Context

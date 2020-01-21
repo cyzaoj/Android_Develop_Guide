@@ -1,11 +1,14 @@
 package com.aboust.develop_guide.kit.notify.entities
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.graphics.Bitmap
 import androidx.annotation.ColorInt
 import androidx.annotation.DrawableRes
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat.GroupAlertBehavior
 import androidx.core.app.Person
+import com.aboust.develop_guide.kit.notify.TYPE_NULL
 
 
 sealed class Payload {
@@ -14,14 +17,17 @@ sealed class Payload {
      * groupKey: 摘要通知添加到通知组中
      * groupSummary: 指定将其用作通知组摘要
      */
-    data class Group(var key: String? = null, var summary: Boolean? = null)
+    @SuppressLint("WrongConstant")
+    data class Group(var key: String? = null,
+                     var summary: Boolean? = null,
+                     @GroupAlertBehavior var alertBehavior: Int = TYPE_NULL)
 
     data class Badge(var showBadge: Boolean = false,
-                     var badgeNumber: Int = -1,
+                     var badgeNumber: Int = TYPE_NULL,
                      var badgeIconType: Int = NotificationCompat.BADGE_ICON_SMALL,
-                     @DrawableRes var icon: Int = -1)
+                     @DrawableRes var icon: Int = TYPE_NULL)
 
-    data class Metadata(
+    data class Meta(
 
             var contentIntent: PendingIntent? = null,
 
@@ -29,6 +35,7 @@ sealed class Payload {
 
             var autoCancel: Boolean = true,
 
+            var priority: Int = TYPE_NULL,
             var category: String? = null,
 
             var localOnly: Boolean = false,
@@ -36,7 +43,6 @@ sealed class Payload {
             var ongoing: Boolean = false,
 
             var timeout: Long = 0L,
-
 
             internal val contacts: ArrayList<String> = ArrayList()
     ) {
@@ -52,7 +58,7 @@ sealed class Payload {
             /**
              *  ① **小图标：** 此为必要图标，通过 setSmallIcon() 设置。
              */
-            @DrawableRes var icon: Int = -1,
+            @DrawableRes var icon: Int = TYPE_NULL,
 
             /**
              * The color of the notification items -- icon, appName, and expand indicator.
@@ -90,12 +96,12 @@ sealed class Payload {
             var largeIcon: Bitmap?
         }
 
-        /**
-         *
-         */
-        interface Expandable {
-            var expandedText: CharSequence?
-        }
+//        /**
+//         *
+//         */
+//        interface Expandable {
+//            var expandedText: CharSequence?
+//        }
 
         /**
          * 默认模式
@@ -114,9 +120,9 @@ sealed class Payload {
                 override var title: CharSequence? = null,
                 override var text: CharSequence? = null,
                 override var largeIcon: Bitmap? = null,
-                override var expandedText: CharSequence? = null,
+//                override var expandedText: CharSequence? = null,
                 var bigText: CharSequence? = null
-        ) : Content(), Standard, LargeIcon, Expandable
+        ) : Content(), Standard, LargeIcon //, Expandable
 
         data class TextList(
                 override var title: CharSequence? = null,
@@ -129,9 +135,9 @@ sealed class Payload {
                 override var title: CharSequence? = null,
                 override var text: CharSequence? = null,
                 override var largeIcon: Bitmap? = null,
-                override var expandedText: CharSequence? = null,
+//                override var expandedText: CharSequence? = null,
                 var picture: Bitmap? = null
-        ) : Content(), Standard, LargeIcon, Expandable
+        ) : Content(), Standard, LargeIcon //, Expandable
 
         data class Message(
                 override var largeIcon: Bitmap? = null,
