@@ -9,6 +9,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationCompat.GroupAlertBehavior
 import androidx.core.app.Person
 import com.aboust.develop_guide.kit.notify.TYPE_NULL
+import com.aboust.develop_guide.kit.notify.core.Action
 
 
 sealed class Payload {
@@ -167,8 +168,8 @@ sealed class Payload {
     }
 
 
-    data class Alerts(
-            val channel: NotifyChannel
+//    data class Alerts(
+//            val channel: NotifyChannel
 //        @NotificationCompat.NotificationVisibility var lockScreenVisibility: Int = NotificationCompat.VISIBILITY_PRIVATE,
 //
 //        val channelId: String = CHANNEL_ID_DEFAULT,
@@ -184,5 +185,31 @@ sealed class Payload {
 //        var vibrationPattern: List<Long> = ArrayList(),
 //
 //        var sound: Uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-    )
+//    )
+
+
+    data class Stackable(
+
+            var key: String? = null,
+
+            var contentIntent: PendingIntent? = null,
+
+            var content: CharSequence? = null,
+
+            var title: ((count: Int) -> String)? = null,
+
+            var description: ((count: Int) -> String)? = null,
+
+            internal var actions: ArrayList<Action>? = null
+    ) {
+
+        /**
+         * Scoped function for modifying the behaviour of the actions associated with the 'Stacked'
+         * notification.
+         */
+        fun actions(init: ArrayList<Action>.() -> Unit) {
+            this.actions = ArrayList()
+            this.actions?.init()
+        }
+    }
 }

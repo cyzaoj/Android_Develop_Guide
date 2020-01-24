@@ -35,7 +35,7 @@ class NotificationActivity : AppCompatActivity() {
                         title = "Default Notification"
                         text = "Default Notification !!!"
                     }.group {
-                        key = "ttttt"
+                        key = "notification_default"
                         summary = true
                     }
                     .show()

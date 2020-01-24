@@ -16,7 +16,6 @@ const val CHANNEL_DESCRIPTION_DEFAULT = "General application notifications."
  * IMPORTANCE_DEFAULT   开启通知，不会弹出，发出提示音，状态栏中显示
  * IMPORTANCE_HIGH      开启通知，会弹出，发出提示音，状态栏中显示
  */
-
 const val IMPORTANCE_MIN = NotificationCompat.PRIORITY_MIN
 const val IMPORTANCE_LOW = NotificationCompat.PRIORITY_LOW
 const val IMPORTANCE_NORMAL = NotificationCompat.PRIORITY_DEFAULT

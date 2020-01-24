@@ -1,22 +1,19 @@
 package com.aboust.develop_guide.kit.notify
 
 import android.app.NotificationManager
-import com.aboust.develop_guide.kit.notify.entities.Payload
 import com.aboust.develop_guide.kit.notify.entities.NotifyChannel
+import com.aboust.develop_guide.kit.notify.entities.Payload
 
 data class NotifyConfig(
-    internal var notificationManager: NotificationManager? = null,
-    internal var header: Payload.Header = Payload.Header(),
-    internal val channels: MutableList<NotifyChannel> = ArrayList()
+        internal var notificationManager: NotificationManager? = null,
+        internal var header: Payload.Header = Payload.Header(),
+        internal val channels: MutableList<NotifyChannel> = ArrayList()
 
 ) {
 
 
-    fun alerting() = Payload.Alerts(
-        NotifyChannel
-            (CHANNEL_ID_DEFAULT, CHANNEL_NAME_DEFAULT, IMPORTANCE_DEFAULT)
+    fun channel() = NotifyChannel(CHANNEL_ID_DEFAULT, CHANNEL_NAME_DEFAULT, IMPORTANCE_DEFAULT)
             .description(CHANNEL_DESCRIPTION_DEFAULT)
-    )
 
 
     /**

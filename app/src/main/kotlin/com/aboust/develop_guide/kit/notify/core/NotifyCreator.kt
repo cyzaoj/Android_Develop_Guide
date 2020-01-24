@@ -10,13 +10,14 @@ import com.aboust.develop_guide.kit.notify.entities.RawNotification
 class NotifyCreator internal constructor(private val notify: Notify) {
 
     private var metadata = Payload.Meta()
-    private var alerts: Payload.Alerts = Notify.configuration.alerting()
+    //    private var alerts: Payload.Alerts = Notify.configuration.alerting()
     private var header = Notify.configuration.header.copy()
     private var content: Payload.Content = Payload.Content.Default()
 
     private var actions: MutableList<Action>? = null
     private var badge: Payload.Badge? = null
     private var group: Payload.Group? = null
+    private var channel: NotifyChannel = Notify.configuration.channel()
 
 //    private var extend: ((NotificationCompat.Builder) -> Unit?)? = null
 
@@ -35,16 +36,22 @@ class NotifyCreator internal constructor(private val notify: Notify) {
         return this
     }
 
-    fun alerting(channel: NotifyChannel, init: Payload.Alerts.() -> Unit): NotifyCreator {
-        this.alerts = this.alerts.copy(channel = channel).also(init)
+    fun channel(init: NotifyChannel.() -> Unit): NotifyCreator {
+        this.channel = this.channel.also(init)
         return this
     }
 
+    /**
+     * https://developer.android.com/training/notify-user/group
+     */
     fun group(init: Payload.Group.() -> Unit): NotifyCreator {
         this.group = Payload.Group().also(init)
         return this
     }
 
+    /**
+     * https://developer.android.com/training/notify-user/badges
+     */
     fun badge(init: Payload.Badge.() -> Unit): NotifyCreator {
         this.badge = Payload.Badge().also(init)
         return this
@@ -79,7 +86,7 @@ class NotifyCreator internal constructor(private val notify: Notify) {
 
     fun asBuilder(): NotificationCompat.Builder {
         //        extend?.let { exec -> exec(builder) }
-        return notify.asBuilder(RawNotification(metadata, alerts, header, content, actions, group, badge))
+        return notify.asBuilder(RawNotification(metadata, channel, header, content, actions, group, badge))
     }
 
 
