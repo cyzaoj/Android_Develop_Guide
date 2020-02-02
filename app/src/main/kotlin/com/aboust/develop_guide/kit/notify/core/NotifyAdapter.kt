@@ -57,8 +57,7 @@ object NotificationHelper {
      */
     internal fun buildNotification(notify: Notify, payload: RawNotification)
             : NotificationCompat.Builder {
-        val alerting = payload.alerting
-        val channel = alerting.channel
+        val channel = payload.channel
         val metadata = payload.meta
         val header = payload.header
         val badge = payload.badge
