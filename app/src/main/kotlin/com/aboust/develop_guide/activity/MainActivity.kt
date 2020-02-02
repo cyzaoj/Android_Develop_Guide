@@ -29,7 +29,9 @@ class ItemViewHolder(itemView: View) : ViewHolder(itemView) {
 class MainActivity : BaseActivity() {
 
     private val dataSource = dataSourceTypedOf(
-        Item(1, null, "Notification", NotificationActivity::class.java)
+            Item(1, null, "Notification", NotificationActivity::class.java),
+            Item(2, null, "Dialog", OnDialogActivity::class.java)
+
     )
 
 
