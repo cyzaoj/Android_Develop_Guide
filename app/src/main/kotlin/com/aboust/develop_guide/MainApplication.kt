@@ -3,8 +3,10 @@ package com.aboust.develop_guide
 import android.app.NotificationManager
 import android.content.Context
 import androidx.multidex.MultiDexApplication
+import com.aboust.develop_guide.kit.Fetch
 import com.aboust.develop_guide.kit.notify.Notify
 import com.aboust.develop_guide.kit.notify.entities.NotifyChannel
+import com.aboust.develop_guide.service.OnDownload
 import com.mikepenz.iconics.Iconics
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic
 
@@ -19,6 +21,7 @@ class MainApplication : MultiDexApplication() {
     private fun configure() {
         Iconics.init(applicationContext)
         Iconics.registerFont(MaterialDesignIconic)
+        Fetch.INSTANCE.create(this)
 
         Notify.config {
             channels {

@@ -1,22 +1,15 @@
 package com.aboust.develop_guide.kit.dialog
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
-import android.content.pm.ActivityInfo
-import android.content.res.Configuration
-import android.content.res.Configuration.ORIENTATION_LANDSCAPE
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.SparseArray
 import android.util.TypedValue
 import android.view.View
 import android.view.Window
@@ -81,7 +74,9 @@ override fun onClick(view: View?, lDialog: OnDialog?) {
 class OnDialog : Dialog {
 
     private var layoutRes by Delegates.notNull<Int>()
-    private val views: SparseArray<View> = SparseArray()
+
+
+    //    private val views: SparseArray<View> = SparseArray()
     private var width = 0
     private var height = 0
     private var bgRadius = 0 //背景圆角
@@ -149,21 +144,21 @@ class OnDialog : Dialog {
 
     //    >>>>>>>>>>>>>>>>>>>>>>>>>>>>设置背景>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-    private fun background(): OnDialog {
+    private fun backgroundDrawable(): OnDialog {
         window?.setBackgroundDrawable(getRoundRectDrawable(bgRadius, backgroundColor))
         return this
     }
 
     fun backgroundColor(@ColorInt color: Int): OnDialog {
         backgroundColor = color
-        return background()
+        return backgroundDrawable()
     }
 
 
     fun backgroundColorRes(@ColorRes colorRes: Int): OnDialog {
 //        bgColor = context.resources.getColor(colorRes)
         backgroundColor = ContextCompat.getColor(this.context, colorRes)
-        return background()
+        return backgroundDrawable()
     }
 
 
@@ -171,15 +166,15 @@ class OnDialog : Dialog {
      *  设置背景圆角
      * @param bgRadius
      */
-    public fun backgroundRadius(bgRadius: Int): OnDialog {
+    fun backgroundRadius(bgRadius: Int): OnDialog {
         this.bgRadius = dp2px(context, bgRadius.toFloat())
-        return background()
+        return backgroundDrawable()
     }
 
-    public fun backgroundRadiusPx(bgRadius: Int): OnDialog {
-        this.bgRadius = bgRadius
-        return background()
-    }
+//    fun backgroundRadiusPx(bgRadius: Int): OnDialog {
+//        this.bgRadius = bgRadius
+//        return backgroundDrawable()
+//    }
 
     //    >>>>>>>>>>>>>>>>>>>>>>>>>>>>设置宽高>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     /**
@@ -199,20 +194,20 @@ class OnDialog : Dialog {
         return fixSize()
     }
 
-    fun widthPX(width: Int): OnDialog {
-        this.width = width
-        return fixSize()
-    }
+//    fun widthPX(width: Int): OnDialog {
+//        this.width = width
+//        return fixSize()
+//    }
 
     fun height(height: Int): OnDialog {
         this.height = dp2px(context, height.toFloat())
         return fixSize()
     }
 
-    fun heightPX(height: Int): OnDialog {
-        this.height = height
-        return fixSize()
-    }
+//    fun heightPX(height: Int): OnDialog {
+//        this.height = height
+//        return fixSize()
+//    }
 
 
     /**
@@ -236,19 +231,29 @@ class OnDialog : Dialog {
     }
 
     //    >>>>>>>>>>>>>>>>>>>>>>>>>>>>设置监听>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+//    fun onClickListener(onClickListener: DialogOnClickListener, vararg viewIds: Int): OnDialog {
+//        val lDialog: OnDialog = this
+//        for (element in viewIds) {
+//            val el = getView<View>(element)
+//            el.setOnClickListener { v -> onClickListener.onClick(v, lDialog) }
+//        }
+//        return this
+//    }
     /**
      * 设置监听
      * @param onClickListener
      * @param viewIds
      */
-    fun onClickListener(onClickListener: DialogOnClickListener, vararg viewIds: Int): OnDialog {
+    fun onClickListener(onClickListener: View.OnClickListener, vararg viewIds: Int): OnDialog {
         val lDialog: OnDialog = this
         for (element in viewIds) {
             val el = getView<View>(element)
-            el?.setOnClickListener { v -> onClickListener.onClick(v, lDialog) }
+            el.setOnClickListener { v -> onClickListener.onClick(v) }
         }
         return this
     }
+
 
     /**
      * 设置 关闭dialog的按钮
@@ -256,21 +261,23 @@ class OnDialog : Dialog {
      * @return
      */
     fun cancel(@IdRes viewId: Int): OnDialog {
-        getView<View>(viewId)?.setOnClickListener { dismiss() }
+        getView<View>(viewId).setOnClickListener { dismiss() }
         return this
     }
 
 
     //    >>>>>>>>>>>>>>>>>>>>>>>>>>>>设置常见属性>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    @SuppressWarnings("unchecked")
-    private fun <T : View?> getView(@IdRes viewId: Int): T? {
-        var view: View? = views[viewId]
-        if (view == null) {
-            view = findViewById(viewId)
-            views.put(viewId, view)
-        }
-        return view as T?
-    }
+//    private fun <T : View?> getView(@IdRes viewId: Int): T {
+//        var view = views[viewId]
+//        if (view == null) {
+//            view = findViewById(viewId)
+//            views.put(viewId, view)
+//        }
+//        return view as T
+
+//    }
+
+    private fun <T : View?> getView(@IdRes viewId: Int): T = findViewById<T>(viewId)
 
     /**
      * Will set the text of a TextView.
@@ -280,13 +287,13 @@ class OnDialog : Dialog {
      * @return The BaseViewHolder for chaining.
      */
     fun text(@IdRes viewId: Int, value: CharSequence?): OnDialog {
-        val view = getView<TextView>(viewId)!!
+        val view = getView<TextView>(viewId)
         view.text = value
         return this
     }
 
     fun text(@IdRes viewId: Int, @StringRes strId: Int): OnDialog {
-        val view = getView<TextView>(viewId)!!
+        val view = getView<TextView>(viewId)
         view.setText(strId)
         return this
     }
@@ -312,7 +319,7 @@ class OnDialog : Dialog {
      * @return The BaseViewHolder for chaining.
      */
     fun backgroundColor(@IdRes viewId: Int, @ColorInt color: Int): OnDialog {
-        val view = getView<View>(viewId)!!
+        val view = getView<View>(viewId)
         view.setBackgroundColor(color)
         return this
     }
@@ -325,7 +332,7 @@ class OnDialog : Dialog {
      * @return The BaseViewHolder for chaining.
      */
     fun backgroundRes(@IdRes viewId: Int, @DrawableRes backgroundRes: Int): OnDialog {
-        val view = getView<View>(viewId)!!
+        val view = getView<View>(viewId)
         view.setBackgroundResource(backgroundRes)
         return this
     }
@@ -338,7 +345,7 @@ class OnDialog : Dialog {
      * @return The BaseViewHolder for chaining.
      */
     fun textColor(@IdRes viewId: Int, @ColorInt textColor: Int): OnDialog {
-        val view = getView<TextView>(viewId)!!
+        val view = getView<TextView>(viewId)
         view.setTextColor(textColor)
         return this
     }
@@ -373,13 +380,13 @@ class OnDialog : Dialog {
     @SuppressLint("ObsoleteSdkInt")
     fun alpha(@IdRes viewId: Int, value: Float): OnDialog {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            getView<View>(viewId)!!.alpha = value
+            getView<View>(viewId).alpha = value
         } else {
             // Pre-honeycomb hack to set Alpha value
             val alpha = AlphaAnimation(value, value)
             alpha.duration = 0
             alpha.fillAfter = true
-            getView<View>(viewId)!!.startAnimation(alpha)
+            getView<View>(viewId).startAnimation(alpha)
         }
         return this
     }
@@ -392,7 +399,7 @@ class OnDialog : Dialog {
      * @return The BaseViewHolder for chaining.
      */
     fun gone(@IdRes viewId: Int, visible: Boolean): OnDialog {
-        val view = getView<View>(viewId)!!
+        val view = getView<View>(viewId)
         view.visibility = if (visible) View.VISIBLE else View.GONE
         return this
     }
@@ -405,14 +412,23 @@ class OnDialog : Dialog {
      * @return The BaseViewHolder for chaining.
      */
     fun visible(@IdRes viewId: Int, visible: Boolean): OnDialog {
-        val view = getView<View>(viewId)!!
+        val view = getView<View>(viewId)
         view.visibility = if (visible) View.VISIBLE else View.INVISIBLE
         return this
     }
 
     private fun getRoundRectDrawable(radius: Int, @ColorInt color: Int): GradientDrawable? {
         //左上、右上、右下、左下的圆角半径
-        val radiusArray = floatArrayOf(radius.toFloat(), radius.toFloat(), radius.toFloat(), radius.toFloat(), radius.toFloat(), radius.toFloat(), radius.toFloat(), radius.toFloat())
+        val radiusArray = floatArrayOf(
+                radius.toFloat(),
+                radius.toFloat(),
+                radius.toFloat(),
+                radius.toFloat(),
+                radius.toFloat(),
+                radius.toFloat(),
+                radius.toFloat(),
+                radius.toFloat()
+        )
         val drawable = GradientDrawable()
         drawable.cornerRadii = radiusArray
         drawable.setColor(if (color != 0) color else Color.TRANSPARENT)
@@ -420,100 +436,100 @@ class OnDialog : Dialog {
     }
 
 
-    interface DialogOnClickListener {
-        fun onClick(view: View?, lDialog: OnDialog?)
-    }
+//    interface DialogOnClickListener {
+//        fun onClick(view: View?, lDialog: OnDialog?)
+//    }
 
 
     /** 1.获取屏幕宽度(单位px)  */
-    fun getWidthPixels(context: Context): Int {
+    private fun getWidthPixels(context: Context): Int {
         return context.resources.displayMetrics.widthPixels
     }
 
     /** 2.获取屏幕高度(单位px)  */
-    fun getHeightPixels(context: Context): Int {
+    private fun getHeightPixels(context: Context): Int {
         return context.resources.displayMetrics.heightPixels
     }
 
-    /** 3.获取屏幕密度 （0.75 / 1.0 / 1.5） 参考网址;http://blog.sina.com.cn/s/blog_74c22b210100s0kw.html  */
-    fun getHeightPixels(activity: Activity): Float {
-        val metric = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(metric)
-        return metric.density
-    }
+//    /** 3.获取屏幕密度 （0.75 / 1.0 / 1.5） 参考网址;http://blog.sina.com.cn/s/blog_74c22b210100s0kw.html  */
+//    fun getHeightPixels(activity: Activity): Float {
+//        val metric = DisplayMetrics()
+//        activity.windowManager.defaultDisplay.getMetrics(metric)
+//        return metric.density
+//    }
 
-    /** 4. 获取状态栏高度 (单位px) */
-    fun getStatusBarHeight(context: Context): Int {
-        var result = 0
-        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
-        if (resourceId > 0) {
-            result = context.resources.getDimensionPixelSize(resourceId)
-        }
-        return result
-    }
+//    /** 4. 获取状态栏高度 (单位px) */
+//    fun getStatusBarHeight(context: Context): Int {
+//        var result = 0
+//        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+//        if (resourceId > 0) {
+//            result = context.resources.getDimensionPixelSize(resourceId)
+//        }
+//        return result
+//    }
+//
+//    /**
+//     * 是否竖屏
+//     * @param context
+//     * @return
+//     */
+//    fun isPortrait(context: Context): Boolean {
+//        val mConfiguration: Configuration = context.resources.configuration //获取设置的配置信息
+//        return mConfiguration.orientation == ORIENTATION_PORTRAIT
+//    }
+//
+//    /**
+//     * 是否横屏
+//     * @param context
+//     * @return
+//     */
+//    fun isLandscape(context: Context): Boolean {
+//        val mConfiguration: Configuration = context.resources.configuration //获取设置的配置信息
+//        return mConfiguration.orientation == ORIENTATION_LANDSCAPE
+//    }
+//
+//    /**
+//     * 强制设置为竖屏
+//     * @param activity
+//     */
+//    fun setPortrait(activity: Activity) {
+//        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+//    }
+//
+//    /**
+//     * 强制设置为横屏
+//     * @param activity
+//     */
+//    fun setLandscape(activity: Activity) {
+//        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+//    }
 
-    /**
-     * 是否竖屏
-     * @param context
-     * @return
-     */
-    fun isPortrait(context: Context): Boolean {
-        val mConfiguration: Configuration = context.resources.configuration //获取设置的配置信息
-        return mConfiguration.orientation == ORIENTATION_PORTRAIT
-    }
-
-    /**
-     * 是否横屏
-     * @param context
-     * @return
-     */
-    fun isLandscape(context: Context): Boolean {
-        val mConfiguration: Configuration = context.resources.configuration //获取设置的配置信息
-        return mConfiguration.orientation == ORIENTATION_LANDSCAPE
-    }
-
-    /**
-     * 强制设置为竖屏
-     * @param activity
-     */
-    fun setPortrait(activity: Activity) {
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-    }
-
-    /**
-     * 强制设置为横屏
-     * @param activity
-     */
-    fun setLandscape(activity: Activity) {
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
-    }
-
-    /**
-     * 判断当前设备是手机还是平板，代码来自 Google I/O App for Android
-     *
-     * @param context
-     * @return 平板返回 True，手机返回 False
-     */
-    fun isPad(context: Context): Boolean {
-        return ((context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE)
-    }
+//    /**
+//     * 判断当前设备是手机还是平板，代码来自 Google I/O App for Android
+//     *
+//     * @param context
+//     * @return 平板返回 True，手机返回 False
+//     */
+//    fun isPad(context: Context): Boolean {
+//        return ((context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE)
+//    }
 
 
-    fun dp2px(context: Context, dpVal: Float): Int {
+    private fun dp2px(context: Context, dpVal: Float): Int {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal, context.resources.displayMetrics).toInt()
     }
 
-    fun sp2px(context: Context, spVal: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, context.resources.displayMetrics).toInt()
-    }
-
-    fun px2dp(context: Context, pxVal: Float): Float {
-        return pxVal / context.resources.displayMetrics.density
-    }
-
-    fun px2sp(context: Context, pxVal: Float): Float {
-        return pxVal / context.resources.displayMetrics.scaledDensity
-    }
+//    fun sp2px(context: Context, spVal: Float): Int {
+//        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, spVal, context.resources.displayMetrics).toInt()
+//    }
+//
+//    fun px2dp(context: Context, pxVal: Float): Float {
+//        return pxVal / context.resources.displayMetrics.density
+//    }
+//
+//    fun px2sp(context: Context, pxVal: Float): Float {
+//        return pxVal / context.resources.displayMetrics.scaledDensity
+//    }
 
 
 }

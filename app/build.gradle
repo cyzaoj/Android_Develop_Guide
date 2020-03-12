@@ -28,6 +28,10 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
 
     buildTypes {
         sourceSets {
@@ -70,11 +74,36 @@ dependencies {
     implementation deps.iconics.core
     implementation deps.iconics.views
 
+
+    implementation deps.afollestad.assent
+    implementation deps.afollestad.recyclical
+    implementation deps.coroutines.retrofit
+
+    implementation deps.squareup.okhttp
+    implementation deps.squareup.okhttp_logging_interceptor
+    implementation deps.squareup.retrofit2
+    implementation deps.squareup.retrofit2_converter_gson
+    implementation deps.coroutines.retrofit
+
+    implementation deps.squareup.okhttp
+    implementation deps.squareup.okhttp_logging_interceptor
+    implementation deps.squareup.retrofit2
+    implementation deps.squareup.retrofit2_converter_gson
+    implementation deps.coroutines.retrofit
+    implementation deps.utils.stetho
+    implementation deps.utils.stetho_okhttp
+    implementation deps.utils.stetho_timber
+    implementation deps.utils.fire_crasher
+    implementation deps.utils.prdownloader
+
+
     implementation 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'
 
+    debugImplementation deps.squareup.leakcanary
+
+    implementation deps.utils.free_proguard
     implementation deps.utils.timber
-
-
+    implementation deps.utils.utilcodex
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junit_test_ext
     androidTestImplementation deps.test.androidx_test_espresso

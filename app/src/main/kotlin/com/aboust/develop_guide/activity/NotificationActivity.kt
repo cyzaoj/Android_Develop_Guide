@@ -65,23 +65,20 @@ class NotificationActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun getBitmap(context: Context, @DrawableRes vectorDrawableId: Int): Bitmap? {
-        var bitmap: Bitmap? = null
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            val vectorDrawable: Drawable? = context.getDrawable(vectorDrawableId)
-            bitmap = Bitmap.createBitmap(
-                    vectorDrawable!!.intrinsicWidth,
-                    vectorDrawable.intrinsicHeight,
-                    Bitmap.Config.ARGB_8888
-            )
-            val canvas = Canvas(bitmap)
-            vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
-            vectorDrawable.draw(canvas)
-        } else {
-            bitmap = BitmapFactory.decodeResource(context.resources, vectorDrawableId)
-        }
-        return bitmap
+    private fun getBitmap(context: Context, @DrawableRes vectorDrawableId: Int): Bitmap? = if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+        val vectorDrawable: Drawable? = context.getDrawable(vectorDrawableId)
+        val bitmap = Bitmap.createBitmap(
+                vectorDrawable!!.intrinsicWidth,
+                vectorDrawable.intrinsicHeight,
+                Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        vectorDrawable.setBounds(0, 0, canvas.width, canvas.height)
+        vectorDrawable.draw(canvas)
+        bitmap
+    } else {
+        BitmapFactory.decodeResource(context.resources, vectorDrawableId)
     }
+
 
 }
