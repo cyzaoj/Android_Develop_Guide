@@ -1,8 +1,14 @@
-package com.aboust.develop_guide.kit
+package com.aboust.develop_guide.kit.network
 
+import android.Manifest.permission.ACCESS_NETWORK_STATE
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 import android.os.Build
-import com.blankj.utilcode.util.NetworkUtils
+import androidx.annotation.RequiresPermission
+import androidx.core.content.ContextCompat
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
@@ -139,7 +145,7 @@ open class Fetch private constructor() {
      */
     private fun httpCacheInterceptor(): Interceptor {
         return Interceptor { chain ->
-            val request: Request = if (NetworkUtils.isConnected()) {
+            val request: Request = if (isNetworkConnected()) {
                 chain.request()
             } else {
                 //没网强制从缓存读取
@@ -147,16 +153,39 @@ open class Fetch private constructor() {
             }
 
             val response = chain.proceed(request)
-            val maxAge = if (NetworkUtils.isConnected()) 0 else 60 * 60 * 6
+            val maxAge = if (isNetworkConnected()) 0 else 60 * 60 * 6
             val builder = response.newBuilder().removeHeader("Pragma")
                     .removeHeader("Cache-Control")
             builder.removeHeader(this.context!!.packageName)            // 清除头信息，因为服务器如果不支持，会返回一些干扰信息，不清除下面无法生效
                     .addHeader(
                             "Cache-Control",
-                            if (NetworkUtils.isConnected()) "public, max-age=$maxAge" else "public, only-if-cached, max-stale=$maxAge"
+                            if (isNetworkConnected()) "public, max-age=$maxAge" else "public, only-if-cached, max-stale=$maxAge"
                     )
                     .build()
         }
     }
+
+
+    /**
+     * 检测网络连接状态是否可用
+     *
+     * @return
+     */
+    @RequiresPermission(ACCESS_NETWORK_STATE)
+    open fun isNetworkConnected(): Boolean {
+        val cm = ContextCompat.getSystemService(context!!, ConnectivityManager::class.java)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            val networkInfo = cm?.activeNetworkInfo ?: return false
+            if (networkInfo.type == ConnectivityManager.TYPE_WIFI || networkInfo.type == ConnectivityManager.TYPE_MOBILE)
+                return true
+        } else {
+            val network: Network? = cm?.activeNetwork
+            val nc = cm?.getNetworkCapabilities(network) ?: return false
+            if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) || nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR))
+                return true
+        }
+        return false
+    }
+
 
 }
