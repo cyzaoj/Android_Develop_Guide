@@ -4,13 +4,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
-import android.util.Pair
 
 
 /**
  * 下载任务请求
  */
 class DownloadRequest private constructor() : Parcelable {
+
     private var allowedNetworkType: Int = -1
 
     private var uri: Uri? = null

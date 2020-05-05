@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.widget.applaunch
+package com.aboust.develop_guide.widget.initjob
 
 
 import android.os.Looper
@@ -11,9 +11,9 @@ import timber.log.Timber
  * 任务真正执行的地方
  */
 class DispatchRunnable constructor(private val job: Job) : Runnable {
-    private lateinit var launcher: AppStarter
+    private lateinit var launcher: JobLaunch
 
-    constructor(job: Job, dispatcher: AppStarter) : this(job) {
+    constructor(job: Job, dispatcher: JobLaunch) : this(job) {
         launcher = dispatcher
     }
 

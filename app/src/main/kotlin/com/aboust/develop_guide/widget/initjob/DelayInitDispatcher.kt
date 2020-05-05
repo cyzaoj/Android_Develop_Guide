@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.widget.applaunch
+package com.aboust.develop_guide.widget.initjob
 
 import android.os.Looper
 import android.os.MessageQueue.IdleHandler

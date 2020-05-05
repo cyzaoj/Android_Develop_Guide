@@ -6,6 +6,7 @@ import androidx.multidex.MultiDexApplication
 import com.aboust.develop_guide.kit.network.Fetch
 import com.aboust.develop_guide.kit.notify.Notify
 import com.aboust.develop_guide.kit.notify.entities.NotifyChannel
+import com.aboust.develop_guide.widget.initjob.JobLaunch
 import com.mikepenz.iconics.Iconics
 import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic
 
@@ -21,7 +22,12 @@ class MainApplication : MultiDexApplication() {
         Iconics.init(applicationContext)
         Iconics.registerFont(MaterialDesignIconic)
         Fetch.INSTANCE.create(this)
+        JobLaunch.init(this)
+        JobLaunch.newInstance().run {
 
+            start()
+            await()
+        }
         Notify.config {
             channels {
                 plus(NotifyChannel("1", "IMPORTANCE_MIN", 1))

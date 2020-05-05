@@ -43,7 +43,6 @@ class DownloadService : IntentService(DOWNLOAD_NAME) {
         val dUrl = uri.toString()
         val notifierID = Utils.getUniqueId(dUrl, dir.path, fileName)
 
-
         PRDownloader.download(uri.toString(), dir.path, fileName)
                 .setTag(DOWNLOAD_NAME)
                 .build()

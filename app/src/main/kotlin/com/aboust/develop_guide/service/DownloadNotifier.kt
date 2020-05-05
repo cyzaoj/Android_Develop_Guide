@@ -90,7 +90,6 @@ class DownloadNotifier(val context: Context) {
                     .setWhen(System.currentTimeMillis())
             notificationManager?.notify(id, it.build())
         }
-
     }
 
     private fun stopNotification(id: Int, icon: Int, title: CharSequence?) {

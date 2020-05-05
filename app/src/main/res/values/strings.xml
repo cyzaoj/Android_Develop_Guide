@@ -11,4 +11,25 @@
     <string name="confirm">确认</string>
     <string name="download_install">下载完成，请点击安装</string>
 
+    <string name="_0_0_0">0.0.0</string>
+    <string name="some_granted">应用部分功能将无法正常使用</string>
+    <string name="exit_app">再按一次将退出程序</string>
+    <string name="exit">退出</string>
+    <string name="scan_code">扫码识别</string>
+    <string name="shortcut_disable_message">shortcut不可用</string>
+
+    <string name="no_data">Ok, 暂无数据.</string>
+    <string name="click_to_retry">点击重试!</string>
+
+    <string name="upgrade">升级</string>
+    <string name="upgrade_ignore">忽略此版本</string>
+    <string name="upgrade_background">后台更新</string>
+    <string name="upgrade_new_version">版本更新啦！</string>
+
+    <string name="index">首页</string>
+    <string name="category">分类</string>
+    <string name="finder">发现</string>
+    <string name="about">我的</string>
+
+
 </resources>

@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.widget.applaunch
+package com.aboust.develop_guide.widget.initjob
 
 import android.content.Context
 import android.os.Looper
@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
 
-open class AppStarter private constructor() {
+open class JobLaunch private constructor() {
 
     private var startTime: Long = 0
     private val futures: MutableList<Future<*>> = ArrayList()
@@ -41,17 +41,17 @@ open class AppStarter private constructor() {
 
     private var dependedMap: HashMap<Class<out Job>, ArrayList<Job>> = HashMap()
 
-    /**
-     * 启动器分析的次数，统计下分析的耗时；
-     */
-    private val analyseCount: AtomicInteger = AtomicInteger()
+//    /**
+//     * 启动器分析的次数，统计下分析的耗时；
+//     */
+//    private val analyseCount: AtomicInteger = AtomicInteger()
 
     /**
      * 保存需要Wait的Task的数量
      */
     private val needWaitCount: AtomicInteger = AtomicInteger()
 
-    fun add(job: Job?): AppStarter {
+    fun add(job: Job?): JobLaunch {
         job?.let {
             collectDepends(it)
             allJobs.add(it)
@@ -81,7 +81,6 @@ open class AppStarter private constructor() {
                 Timber.i("needWait: %s", task.javaClass.simpleName)
             }
             if (value > 0) countDownLatch?.await(WAIT_TIME.toLong(), TimeUnit.MILLISECONDS)
-
         } catch (e: InterruptedException) {
             Timber.e(e)
         }
@@ -116,7 +115,7 @@ open class AppStarter private constructor() {
         if (onMain()) throw  RuntimeException("must be called from UiThread")
 
         if (allJobs.isNotEmpty()) {
-            analyseCount.getAndIncrement()
+//            analyseCount.getAndIncrement()
             printDependedMsg()
             allJobs = JobSort.getSortResult(allJobs, jobClassTypes)
             countDownLatch = CountDownLatch(needWaitCount.get())
@@ -221,16 +220,16 @@ open class AppStarter private constructor() {
 
         fun init(context: Context?) {
             context?.let {
-                AppStarter.context = context.applicationContext
+                JobLaunch.context = context.applicationContext
                 isMainProcess = onMain()
                 hasInit = true
             }
         }
 
 
-        fun newInstance(): AppStarter {
+        fun newInstance(): JobLaunch {
             if (!hasInit) throw java.lang.RuntimeException("must call AppStarter.init first")
-            return AppStarter()
+            return JobLaunch()
         }
 
     }
