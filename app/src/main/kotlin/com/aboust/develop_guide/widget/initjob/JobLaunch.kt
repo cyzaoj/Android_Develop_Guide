@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger
 open class JobLaunch private constructor() {
 
     private var startTime: Long = 0
+
     private val futures: MutableList<Future<*>> = ArrayList()
 
     /**
@@ -79,7 +80,7 @@ open class JobLaunch private constructor() {
             for (job in needWaitJobs) {
                 Timber.i("needWait: %s", job.javaClass.simpleName)
             }
-            if (value > 0) countDownLatch?.await(WAIT_TIME.toLong(), TimeUnit.MILLISECONDS)
+            if (value > 0) countDownLatch?.await(WAIT_TIME, TimeUnit.MILLISECONDS)
         } catch (e: InterruptedException) {
             Timber.e(e)
         }
@@ -207,7 +208,7 @@ open class JobLaunch private constructor() {
 
 
     companion object {
-        private const val WAIT_TIME = 10
+        private const val WAIT_TIME = 10L
         private fun onMain() = Looper.getMainLooper() == Looper.myLooper()
 
         @Volatile

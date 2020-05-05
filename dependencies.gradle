@@ -106,8 +106,8 @@ deps.fresco = fresco
 
 
 def iconics = [:]
-iconics.core = 'com.mikepenz:iconics-core:5.0.0-a03'
-iconics.views = 'com.mikepenz:iconics-views:5.0.0-a03'
+iconics.core = 'com.mikepenz:iconics-core:5.0.2'
+iconics.views = 'com.mikepenz:iconics-views:5.0.2'
 deps.iconics = iconics
 
 
