@@ -12,4 +12,7 @@
     <external-path
         name="app_files"
         path="app_files/" />
+    <cache-path
+        name="apk_install"
+        path="apk_install/" />
 </paths>

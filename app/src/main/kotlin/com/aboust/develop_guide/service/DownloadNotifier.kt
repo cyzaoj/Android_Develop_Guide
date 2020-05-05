@@ -5,11 +5,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.AdaptiveIconDrawable
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.os.Build
+import android.text.TextUtils
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
+import kotlin.math.roundToInt
 
 
 class DownloadNotifier(val context: Context) {
@@ -17,6 +20,7 @@ class DownloadNotifier(val context: Context) {
     private var notificationManager: NotificationManager? = null
     private var notifyBuilder: NotificationCompat.Builder? = null
     private val localID = ThreadLocal<Int>()
+
 
     companion object {
 
@@ -67,12 +71,12 @@ class DownloadNotifier(val context: Context) {
 
     fun stop(icon: Int, title: CharSequence?) {
         val id = localID.get()
-        id?.let { stopNotification(it, icon, title) }
+        id?.let { stop(it, icon, title) }
     }
 
     fun update(total: Long, offset: Long) {
         val id = localID.get()
-        id?.let { updateNotification(it, total, offset) }
+        id?.let { update(it, total, offset) }
     }
 
 
@@ -84,20 +88,21 @@ class DownloadNotifier(val context: Context) {
             it.setContentTitle(title)
                     .setContentText(description)
                     .setSmallIcon(icon)
-                    .setLargeIcon(appIcon())
+                    .setLargeIcon(getAppIcon(this.context))
                     .setOngoing(true)
                     .setAutoCancel(true)
                     .setWhen(System.currentTimeMillis())
+                    .priority = NotificationCompat.PRIORITY_LOW
             notificationManager?.notify(id, it.build())
         }
     }
 
-    private fun stopNotification(id: Int, icon: Int, title: CharSequence?) {
+    private fun stop(id: Int, icon: Int, title: CharSequence?) {
         notifyBuilder?.let {
             it
                     .setContentTitle(title)
                     .setSmallIcon(icon)
-                    .setLargeIcon(appIcon())
+                    .setLargeIcon(getAppIcon(this.context))
                     .setOngoing(true)
                     .setAutoCancel(true)
                     .setWhen(System.currentTimeMillis())
@@ -110,21 +115,50 @@ class DownloadNotifier(val context: Context) {
     /**
      * 更新通知
      */
-    private fun updateNotification(id: Int, total: Long, offset: Long) {
-        val p = offset / total
-        notifyBuilder?.setContentText("${p}%")
-        notifyBuilder?.setProgress(100, p.toInt(), false)
+    private var prevRate = 0
+
+    private fun update(id: Int, total: Long, offset: Long) {
+        val progress = (offset * 1.0F) / total
+        //做一下判断，防止自回调过于频繁，造成更新通知栏进度过于频繁，而出现卡顿的问题。
+        val rate = (progress * 100).roundToInt()
+        if (prevRate == rate) return
+        notifyBuilder?.setContentText("${rate}%")
+        notifyBuilder?.setProgress(100, rate, false)
         notificationManager?.notify(id, notifyBuilder?.build())
+        this.prevRate = rate
     }
 
 
-    private fun appIcon(): Bitmap? {
-        val packageManager = this.context.applicationContext.packageManager
-        val appInfo = packageManager.getApplicationInfo(context.packageName, 0)
-        val d: Drawable = packageManager.getApplicationIcon(appInfo)
-        val bd = d as BitmapDrawable
-        return bd.bitmap
-    }
+//    private fun appIcon(): Bitmap? {
+//        val packageManager = this.context.applicationContext.packageManager
+//        val appInfo = packageManager.getApplicationInfo(context.packageName, 0)
+//        val d: Drawable = packageManager.getApplicationIcon(appInfo)
+//        val bd = d as BitmapDrawable
+//        return bd.bitmap
+//    }
 
+    private fun getAppIcon(context: Context?): Bitmap? {
+        val ctx = context?.applicationContext
+        val packageManager = ctx?.packageManager
+        val packageName = ctx?.packageName
+        if (TextUtils.isEmpty(packageName)) return null
+        val drawable = packageManager?.getApplicationIcon(packageName!!)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            when (drawable) {
+                is BitmapDrawable -> drawable.bitmap
+                is AdaptiveIconDrawable -> {
+                    val bitmap =
+                            Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888)
+                    val canvas = Canvas(bitmap)
+                    drawable.setBounds(0, 0, canvas.width, canvas.height)
+                    drawable.draw(canvas)
+                    bitmap
+                }
+                else -> null
+            }
+        } else {
+            (drawable as BitmapDrawable).bitmap
+        }
+    }
 
 }

@@ -77,7 +77,7 @@ abstract class Job : InitialJob {
 
     override fun getTailRunnable(): Runnable? = null
 
-    override fun taskCallBack(callBack: JobCallBack?) {}
+    override fun call(call: JobCall?) {}
 
     override fun needCall(): Boolean = false
 

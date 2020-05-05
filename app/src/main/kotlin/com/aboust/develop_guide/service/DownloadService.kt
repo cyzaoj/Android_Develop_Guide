@@ -34,12 +34,13 @@ class DownloadService : IntentService(DOWNLOAD_NAME) {
         //        if (!dir.exists()) if (!dir.createNewFile()) {
         //            throw IllegalArgumentException("destinationUri create failure !!!")
         //        }
-        val dir = if (targetFile.exists()) {
-            targetFile.parentFile
-        } else {
-            throw IllegalArgumentException("destinationUri must is file uri")
-        }
+//        val dir = if (targetFile.exists() && targetFile.isFile) {
+//            targetFile.parentFile
+//        } else {
+//            throw IllegalArgumentException("destinationUri must is file uri")
+//        }
         val fileName = targetFile.name
+        val dir = targetFile.parentFile!!
         val dUrl = uri.toString()
         val notifierID = Utils.getUniqueId(dUrl, dir.path, fileName)
 
@@ -83,8 +84,8 @@ class DownloadService : IntentService(DOWNLOAD_NAME) {
 
     companion object {
         private const val DOWNLOAD_REQUEST = "download_request"
-        private const val DOWNLOAD_READ_TIME_OUT = 30000
-        private const val DOWNLOAD_CONNECT_TIME_OUT = 30000
+        private const val DOWNLOAD_READ_TIME_OUT = 30_000
+        private const val DOWNLOAD_CONNECT_TIME_OUT = 30_000
 
         fun start(context: Context, request: DownloadRequest) {
             val i = Intent(context, DownloadService::class.java)

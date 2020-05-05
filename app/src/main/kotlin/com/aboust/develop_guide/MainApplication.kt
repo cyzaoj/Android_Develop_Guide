@@ -12,8 +12,16 @@ import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesign
 
 class MainApplication : MultiDexApplication() {
 
+    private lateinit var launch: JobLaunch
+
     override fun onCreate() {
         super.onCreate()
+
+        JobLaunch.init(this)
+        launch = JobLaunch.newInstance().apply {
+            start()
+            await()
+        }
         configure()
     }
 
@@ -22,12 +30,7 @@ class MainApplication : MultiDexApplication() {
         Iconics.init(applicationContext)
         Iconics.registerFont(MaterialDesignIconic)
         Fetch.INSTANCE.create(this)
-        JobLaunch.init(this)
-        JobLaunch.newInstance().run {
 
-            start()
-            await()
-        }
         Notify.config {
             channels {
                 plus(NotifyChannel("1", "IMPORTANCE_MIN", 1))
@@ -41,5 +44,10 @@ class MainApplication : MultiDexApplication() {
             }
             notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         }
+    }
+
+    override fun onTerminate() {
+        super.onTerminate()
+        launch.cancel()
     }
 }

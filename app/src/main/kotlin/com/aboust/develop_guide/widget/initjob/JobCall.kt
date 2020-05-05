@@ -1,5 +1,5 @@
 package com.aboust.develop_guide.widget.initjob
 
-interface JobCallBack {
+interface JobCall {
     fun call()
 }

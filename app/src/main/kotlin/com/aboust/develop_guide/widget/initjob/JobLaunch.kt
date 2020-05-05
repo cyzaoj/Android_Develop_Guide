@@ -26,16 +26,15 @@ open class JobLaunch private constructor() {
     private var allJobs: MutableList<Job> = ArrayList()
 
     /**
-     * 调用了await的时候还没结束的且需要等待的Task
+     * 调用了await的时候还没结束的且需要等待的Job
      */
     private val needWaitJobs: MutableList<Job> = ArrayList()
-
 
     @Volatile
     private var onMainJobs: MutableList<Job> = ArrayList()
 
     @Volatile
-    private var finishedTasks: MutableList<Class<out Job>> = ArrayList(100) //已经结束了的Task
+    private var finishedJobs: MutableList<Class<out Job>> = ArrayList(100) //已经结束了的Task
 
     private var countDownLatch: CountDownLatch? = null
 
@@ -47,7 +46,7 @@ open class JobLaunch private constructor() {
 //    private val analyseCount: AtomicInteger = AtomicInteger()
 
     /**
-     * 保存需要Wait的Task的数量
+     * 保存需要Wait的Job的数量
      */
     private val needWaitCount: AtomicInteger = AtomicInteger()
 
@@ -77,8 +76,8 @@ open class JobLaunch private constructor() {
         try {
             val value = needWaitCount.get()
             Timber.i("still has %s", value)
-            for (task in needWaitJobs) {
-                Timber.i("needWait: %s", task.javaClass.simpleName)
+            for (job in needWaitJobs) {
+                Timber.i("needWait: %s", job.javaClass.simpleName)
             }
             if (value > 0) countDownLatch?.await(WAIT_TIME.toLong(), TimeUnit.MILLISECONDS)
         } catch (e: InterruptedException) {
@@ -100,7 +99,7 @@ open class JobLaunch private constructor() {
                     val deps = dependedMap[cls]
                     if (null == deps) this.dependedMap[cls] = ArrayList()
                     dependedMap[cls]?.add(job)
-                    if (finishedTasks.contains(cls)) job.satisfy()
+                    if (finishedJobs.contains(cls)) job.satisfy()
                 }
             }
         }
@@ -112,7 +111,7 @@ open class JobLaunch private constructor() {
     @UiThread
     fun start() {
         this.startTime = System.currentTimeMillis()
-        if (onMain()) throw  RuntimeException("must be called from UiThread")
+        if (!onMain()) throw  RuntimeException("must be called from UiThread")
 
         if (allJobs.isNotEmpty()) {
 //            analyseCount.getAndIncrement()
@@ -121,7 +120,7 @@ open class JobLaunch private constructor() {
             countDownLatch = CountDownLatch(needWaitCount.get())
 
             sendAndExecuteAsync()
-            Timber.i(" task analyse cost %s ", (System.currentTimeMillis() - startTime))
+            Timber.i(" job analyse cost %s ", System.currentTimeMillis() - startTime)
             executeMain()
         }
 
@@ -130,20 +129,20 @@ open class JobLaunch private constructor() {
 
     private fun executeMain() {
         startTime = System.currentTimeMillis()
-        for (task in onMainJobs) {
+        for (job in onMainJobs) {
             val time = System.currentTimeMillis()
-            DispatchRunnable(task, this).run()
-            Timber.i("real main %s cost  %s ", task.javaClass.simpleName, System.currentTimeMillis() - time)
+            DispatchRunnable(job, this).run()
+            Timber.i("real main %s cost  %s ", job.javaClass.simpleName, System.currentTimeMillis() - time)
         }
-        Timber.i("mainTask cost %s", (System.currentTimeMillis() - startTime))
+        Timber.i("mainJob cost %s", System.currentTimeMillis() - startTime)
     }
 
     private fun sendAndExecuteAsync() {
         for (job in allJobs) {
             if (!isMainProcess && job.onlyInMainProcess()) {
-                markTaskDone(job)
+                markJobDone(job)
             } else {
-                sendTaskReal(job)
+                sendJobReal(job)
             }
             job.setSend(true)
         }
@@ -158,29 +157,29 @@ open class JobLaunch private constructor() {
     fun satisfyChildren(launchJob: Job) {
         val arrayList = dependedMap[launchJob.javaClass]
         if (true == arrayList?.isNotEmpty())
-            for (task in arrayList) {
-                task.satisfy()
+            for (job in arrayList) {
+                job.satisfy()
             }
     }
 
-    fun markTaskDone(job: Job) {
+    fun markJobDone(job: Job) {
         if (ifNeedWait(job)) {
-            finishedTasks.add(job.javaClass)
+            finishedJobs.add(job.javaClass)
             needWaitJobs.remove(job)
             countDownLatch?.countDown()
             needWaitCount.getAndDecrement()
         }
     }
 
-    private fun sendTaskReal(job: Job) {
+    private fun sendJobReal(job: Job) {
         if (job.onMainThread()) {
             onMainJobs.add(job)
             if (job.needCall()) {
-                job.taskCallBack(object : JobCallBack {
+                job.call(object : JobCall {
                     override fun call() {
                         job.setFinished(true)
                         satisfyChildren(job)
-                        markTaskDone(job)
+                        markJobDone(job)
                         Timber.i("%s finish", job.javaClass.simpleName)
                     }
                 })

@@ -54,7 +54,7 @@ interface InitialJob {
      */
     fun getTailRunnable(): Runnable?
 
-    fun taskCallBack(callBack: JobCallBack?)
+    fun call(call: JobCall?)
 
     fun needCall(): Boolean
 }
