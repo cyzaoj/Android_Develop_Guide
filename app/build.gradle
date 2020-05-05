@@ -67,9 +67,9 @@ dependencies {
     implementation deps.afollestad.assent_core
     implementation deps.afollestad.assent_coroutines
     implementation deps.afollestad.recyclical
-//
-//    implementation deps.iconics.core
-//    implementation deps.iconics.views
+
+    implementation deps.iconics.core
+    implementation deps.iconics.views
 
 
     implementation deps.squareup.okhttp

@@ -1,6 +1,5 @@
 package com.aboust.develop_guide.activity
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -21,7 +20,6 @@ import kotlinx.android.synthetic.main.common_toolbar.*
  */
 class NotificationActivity : AppCompatActivity() {
 
-    @SuppressLint("WrongConstant")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)

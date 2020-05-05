@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical">
-<!--
+
         <com.mikepenz.iconics.view.IconicsImageView
             android:id="@+id/toolbar_left"
             android:layout_width="@dimen/toolbar_icon_size"
@@ -19,7 +19,7 @@
             android:layout_alignParentStart="true"
             android:clickable="true"
             android:focusable="true"
-            app:iiv_icon="gmi-arrow_left" />-->
+            app:iiv_icon="gmi-arrow_left" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/toolbar_title"
