@@ -3,4 +3,8 @@
     <declare-styleable name="RichTextView">
         <attr name="fontAsset" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="EditDrawableText">
+        <attr name="isDrawableShownWhenTextIsEmpty" format="boolean" />
+    </declare-styleable>
 </resources>
