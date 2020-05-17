@@ -1,7 +1,7 @@
-package com.aboust.develop_guide.kit
+package com.aboust.develop_guide.kit.fetch
 
 import android.content.Context
-import com.aboust.develop_guide.kit.Environment.Companion.getSelectedEnvironment
+import com.aboust.develop_guide.kit.fetch.Environment.Companion.getSelectedEnvironment
 import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.Interceptor
 import okhttp3.Request
@@ -29,7 +29,7 @@ class HostInterceptor(context: Context) : Interceptor {
     private fun Request.host(hostString: String): Request {
 
         //如果 Url 地址中包含 IDENTIFICATION_IGNORE 标识符, 框架将不会对此 Url 进行任何切换 BaseUrl 的操作
-        if (url.contains(IDENTIFICATION_IGNORE)) {
+        if (hostString.contains(IDENTIFICATION_IGNORE)) {
             return pruneIdentification(newBuilder, url);
         }
 

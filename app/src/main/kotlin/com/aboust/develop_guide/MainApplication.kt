@@ -3,7 +3,7 @@ package com.aboust.develop_guide
 import android.app.NotificationManager
 import android.content.Context
 import androidx.multidex.MultiDexApplication
-import com.aboust.develop_guide.kit.network.Fetch
+import com.aboust.develop_guide.kit.fetch.Fetch
 import com.aboust.develop_guide.kit.notify.Notify
 import com.aboust.develop_guide.kit.notify.entities.NotifyChannel
 import com.aboust.develop_guide.widget.initjob.JobLaunch

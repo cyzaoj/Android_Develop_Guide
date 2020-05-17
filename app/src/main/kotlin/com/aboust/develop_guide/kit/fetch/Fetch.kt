@@ -1,11 +1,10 @@
-package com.aboust.develop_guide.kit.network
+package com.aboust.develop_guide.kit.fetch
 
 import android.Manifest.permission.ACCESS_NETWORK_STATE
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import android.net.NetworkInfo
 import android.os.Build
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat

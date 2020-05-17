@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.kit
+package com.aboust.develop_guide.kit.fetch
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -47,7 +47,7 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
                     .asSequence()
                     .map { (_, value) -> value }
                     .filterIsInstance<String>()
-                    .mapNotNull(Environment::decode)
+                    .mapNotNull(Companion::decode)
                     .filter { it != None }
                     .distinct()
                     .sortedBy { it.name }
@@ -71,7 +71,7 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
 
         internal fun SharedPreferences.getSelectedEnvironment(): Environment {
             return getString(PREFERENCES_KEY_SELECTED_ENVIRONMENT, null)
-                    ?.run(Environment::decode)
+                    ?.run(Companion::decode)
                     ?: None
         }
     }
