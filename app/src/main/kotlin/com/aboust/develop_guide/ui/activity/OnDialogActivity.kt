@@ -1,8 +1,8 @@
-package com.aboust.develop_guide.activity
+package com.aboust.develop_guide.ui.activity
 
 import android.os.Bundle
 import com.aboust.develop_guide.R
-import com.aboust.develop_guide.kit.dialog.OnDialog
+import com.aboust.develop_guide.widget.OnDialog
 import kotlinx.android.synthetic.main.activity_on_dialog.*
 
 class OnDialogActivity : BaseActivity() {

@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.kit.dialog
+package com.aboust.develop_guide.widget
 
 import android.annotation.SuppressLint
 import android.app.Dialog
@@ -87,7 +87,6 @@ class OnDialog : Dialog {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, @StyleRes themeResId: Int) : super(context, themeResId)
-
     constructor(@NonNull context: Context, cancelable: Boolean, cancelListener: DialogInterface.OnCancelListener) : super(context, cancelable, cancelListener)
 
     fun layout(@LayoutRes layoutRes: Int): OnDialog {

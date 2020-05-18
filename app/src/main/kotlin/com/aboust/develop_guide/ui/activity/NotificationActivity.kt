@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.activity
+package com.aboust.develop_guide.ui.activity
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,7 +10,6 @@ import android.os.Bundle
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import com.aboust.develop_guide.R
-import com.aboust.develop_guide.kit.notify.Notify
 import kotlinx.android.synthetic.main.activity_notification.*
 import kotlinx.android.synthetic.main.common_toolbar.*
 
@@ -27,39 +26,15 @@ class NotificationActivity : AppCompatActivity() {
         toolbar_title.text = getString(R.string.notification)
 
         notification_default.setOnClickListener {
-            Notify
-                    .with(this)
-                    .content {
-                        title = "Default Notification"
-                        text = "Default Notification !!!"
-                    }.group {
-                        key = "notification_default"
-                        summary = true
-                    }
-                    .show()
+
         }
 
         notification_big_text.setOnClickListener {
-            Notify
-                    .with(this)
-                    .asBigText {
-                        title = "This is a BigText"
-                        text = "this is a bigText!!!"
-                        bigText =
-                                "应用 NotificationCompat.BigTextStyle，以在通知的展开内容区域显示文本：添加一大段文本"
-                    }
-                    .show()
+
         }
 
         notification_big_picture.setOnClickListener {
-            Notify
-                    .with(this)
-                    .asBigPicture {
-                        picture = getBitmap(this@NotificationActivity, R.mipmap.ic_launcher)
-                        title = "This is a BigPicture"
-                        text = "this is a BigPicture!!!"
-                    }
-                    .show()
+
         }
     }
 

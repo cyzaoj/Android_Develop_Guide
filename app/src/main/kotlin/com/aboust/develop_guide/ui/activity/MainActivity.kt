@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.activity
+package com.aboust.develop_guide.ui.activity
 
 import android.content.Intent
 import android.net.Uri

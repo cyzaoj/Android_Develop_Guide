@@ -8,6 +8,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.annotation.RequiresPermission
 import androidx.core.content.ContextCompat
+import com.aboust.develop_guide.BuildConfig
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonDeserializer
@@ -41,11 +42,6 @@ open class Fetch private constructor() {
         val INSTANCE: Fetch by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) { Fetch() }
     }
 
-
-    fun debug(debug: Boolean): Fetch {
-        this.debug = debug
-        return this
-    }
 
     fun header(key: String, value: Any?): Fetch {
         headers[key] = value
@@ -97,7 +93,7 @@ open class Fetch private constructor() {
         }
 
         val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.level = if (this.debug) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
+        loggingInterceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.BASIC
 
         val builder = OkHttpClient.Builder().connectTimeout(TIME_OUT_CONNECT, TimeUnit.MILLISECONDS)
                 .readTimeout(TIME_OUT_READ, TimeUnit.MILLISECONDS)

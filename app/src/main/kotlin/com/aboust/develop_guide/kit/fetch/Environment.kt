@@ -12,14 +12,15 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
         val filteredEnvironments = environments.distinctBy { it.name }.sortedBy { it.name }
 
         //已保存选择
-        val preferences = preferences(context)
-        val selectedEnvironment = preferences.getSelectedEnvironment()
-        preferences.edit().clear().apply()
+        val savedPreferences = getSharedPreferences(context)
+        val selectedEnvironment = savedPreferences.getSelectedEnvironment()
+        savedPreferences.edit().clear().apply()
+
         if (selectedEnvironment in filteredEnvironments) {
-            preferences.saveSelectedEnvironment(selectedEnvironment)
+            savedPreferences.saveSelectedEnvironment(selectedEnvironment)
         }
         for (environment in filteredEnvironments) {
-            preferences.saveEnvironment(environment)
+            savedPreferences.saveEnvironment(environment)
         }
     }
 
@@ -41,7 +42,6 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
             return if (name == value) null else Environment(name, hosts)
         }
 
-
         internal fun SharedPreferences.getAllEnvironments(): List<Environment> {
             return listOf(None) + all.entries
                     .asSequence()
@@ -59,8 +59,7 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
             edit().putString(environment.name, encoded).apply()
         }
 
-
-        fun preferences(context: Context): SharedPreferences {
+        fun getSharedPreferences(context: Context): SharedPreferences {
             return context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE)
         }
 
