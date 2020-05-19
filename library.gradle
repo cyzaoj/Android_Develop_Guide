@@ -1,0 +1,5 @@
+ext.library = [:]
+
+def tencent = [:]
+tencent.wechat = 'com.tencent.mm.opensdk:wechat-sdk-android-without-mta:+'
+library.tencent = tencent

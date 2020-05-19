@@ -1,6 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     apply from: rootProject.file('dependencies.gradle')
+    apply from: rootProject.file('library.gradle')
     repositories {
         maven { url 'https://www.jitpack.io' }
 //        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }

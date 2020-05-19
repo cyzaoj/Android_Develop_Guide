@@ -151,7 +151,6 @@ utils.needs = 'com.github.skydoves:needs:1.0.8'
 utils.prdownloader = 'com.mindorks.android:prdownloader:0.6.0'
 utils.notify = 'io.karn:notify:1.3.0'
 
-
 deps.utils = utils
 
 

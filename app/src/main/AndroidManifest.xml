@@ -59,6 +59,9 @@
         </provider>
 
         <service android:name=".service.DownloadService" />
+
+        <meta-data android:name="WEIXIN_APP_ID" android:value="${WEIXIN_APP_ID}" />
+        <meta-data android:name="WEIXIN_APP_SECRET" android:value="${WEIXIN_APP_SECRET}" />
     </application>
 
 </manifest>
