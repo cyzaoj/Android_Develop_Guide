@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Android_Develop_Guide</string>
-
+    <string name="login">登录</string>
+    <string name="register">注册</string>
 
     <string name="notification">消息通知</string>
     <string name="_default">默认</string>
@@ -31,14 +32,20 @@
     <string name="finder">发现</string>
     <string name="about">我的</string>
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="prompt_username">用户名</string>
+    <string name="prompt_password">密码</string>
+    <string name="action_sign_in">登录</string>
+    <string name="action_sign_in_short">登录 or 注册</string>
     <string name="welcome">"Welcome!"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
-    <string name="login_failed">"Login failed"</string>
+    <string name="login_failed">"登录失败"</string>
+
+
+
+    <string name="fragment_login_title">登录</string>
+    <string name="fragment_login_sub_title">还没有账户，立即注册</string>
+    <string name="or">你也可以用以下登录方式</string>
 
 
 </resources>

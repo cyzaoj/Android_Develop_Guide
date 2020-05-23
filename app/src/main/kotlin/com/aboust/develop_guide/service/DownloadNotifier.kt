@@ -147,8 +147,8 @@ class DownloadNotifier(val context: Context) {
             when (drawable) {
                 is BitmapDrawable -> drawable.bitmap
                 is AdaptiveIconDrawable -> {
-                    val bitmap =
-                            Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888)
+                    val bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(),
+                            drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888)
                     val canvas = Canvas(bitmap)
                     drawable.setBounds(0, 0, canvas.width, canvas.height)
                     drawable.draw(canvas)

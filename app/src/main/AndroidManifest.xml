@@ -39,8 +39,9 @@
         </activity>
         <activity android:name=".ui.activity.NotificationActivity" />
         <activity android:name=".ui.activity.OnDialogActivity" />
+        <activity android:name=".ui.activity.UmbrellaActivity" />
         <activity
-            android:name=".ui.activity.UserLoginActivity"
+            android:name=".ui.activity.LoginActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,8 +61,12 @@
 
         <service android:name=".service.DownloadService" />
 
-        <meta-data android:name="WEIXIN_APP_ID" android:value="${WEIXIN_APP_ID}" />
-        <meta-data android:name="WEIXIN_APP_SECRET" android:value="${WEIXIN_APP_SECRET}" />
+        <meta-data
+            android:name="WEIXIN_APP_ID"
+            android:value="${WEIXIN_APP_ID}" />
+        <meta-data
+            android:name="WEIXIN_APP_SECRET"
+            android:value="${WEIXIN_APP_SECRET}" />
     </application>
 
 </manifest>

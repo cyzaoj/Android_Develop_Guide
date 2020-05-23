@@ -41,4 +41,11 @@
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/text_size_sub_title</item>
     </style>
+
+    <style name="AppCompatTextEdit" parent="Widget.AppCompat.EditText">
+        <item name="colorControlNormal">@color/colorNormal</item>
+        <item name="colorControlActivated">@color/colorPressed</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
 </resources>

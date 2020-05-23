@@ -150,6 +150,7 @@ utils.fire_crasher = 'com.github.osama-raddad:FireCrasher:2.0.0'
 utils.needs = 'com.github.skydoves:needs:1.0.8'
 utils.prdownloader = 'com.mindorks.android:prdownloader:0.6.0'
 utils.notify = 'io.karn:notify:1.3.0'
+utils.link_builder = 'com.klinkerapps:link_builder:2.0.5'
 
 deps.utils = utils
 

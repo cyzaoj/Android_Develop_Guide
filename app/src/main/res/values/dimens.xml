@@ -59,7 +59,6 @@
     <dimen name="list_item_double_line_icon_height">72dp</dimen>
     <dimen name="list_item_double_line_image_height">72dp</dimen>
 
-
     <dimen name="list_item_three_line_height">88dp</dimen>
 
     <!-- applayout -->
@@ -69,15 +68,8 @@
     <dimen name="app_layout_spacing_bottom">28dp</dimen>
     <dimen name="app_layout_text_size_title">24dp</dimen>
 
-
     <dimen name="about_layout_top_height">160dp</dimen>
-
-
-    <dimen name="app_version_title_min_width">130dp</dimen>
-    <dimen name="app_version_top_min_height">90dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="fragment_horizontal_margin">16dp</dimen>
-    <dimen name="fragment_vertical_margin">16dp</dimen>
+    <dimen name="fragment_login_rootView_marginHorizontal">24dp</dimen>
 
 
 </resources>
