@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- common -->
+    <dimen name="line_spacing_extra">5dp</dimen>
+    <dimen name="text_size_title">17sp</dimen>
+    <dimen name="text_size_sub_title">14sp</dimen>
+    <dimen name="text_size_content">13sp</dimen>
+    <dimen name="text_size_small">11sp</dimen>
+    <dimen name="radius">4dp</dimen>
+    <dimen name="logo_size">45dp</dimen>
+
+    <dimen name="progress_bar_horizontal_height">1.5dp</dimen>
+
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="button_radius">4dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_padding_horizontal">16dp</dimen>
+    <dimen name="button_min_width">64dp</dimen>
+
+    <!-- toolbar -->
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_spacing_horizontal">16dp</dimen>
+    <dimen name="toolbar_title_left_margin">32dp</dimen>
+    <dimen name="toolbar_icon_margin_horizontal">24dp</dimen>
+    <dimen name="toolbar_icon_size">22dp</dimen>
+    <dimen name="toolbar_text_size_title">17sp</dimen>
+    <dimen name="toolbar_text_size_sub_title">15sp</dimen>
+
+
+    <dimen name="dialog_width">280dp</dimen>
+    <dimen name="dialog_title_height">40dp</dimen>
+    <dimen name="dialog_padding_horizontal">24dp</dimen>
+    <dimen name="dialog_content_top">36dp</dimen>
+    <dimen name="dialog_content_margin_bottom">28dp</dimen>
+    <dimen name="dialog_content_icon_size">40dp</dimen>
+    <dimen name="dialog_content_radio_size">24dp</dimen>
+    <dimen name="dialog_content_icon_spacing_item">32dp</dimen>
+
+    <dimen name="dialog_actions_height">52dp</dimen>
+    <dimen name="dialog_actions_padding">8dp</dimen>
+    <dimen name="dialog_actions_button_height">36dp</dimen>
+    <dimen name="dialog_actions_button_spacing_vertical">12dp</dimen>
+    <dimen name="dialog_actions_button_margin_horizontal">8dp</dimen>
+
+
+    <dimen name="list_item_spacing_horizontal">16dp</dimen>
+    <dimen name="list_item_single_line_height">48dp</dimen>
+    <dimen name="list_item_single_line_icon_size">20dp</dimen>
+    <dimen name="list_item_single_line_icon_height">56dp</dimen>
+    <dimen name="list_item_single_line_icon_margin_vertical">8dp</dimen>
+    <dimen name="list_item_single_line_text_margin_vertical">16dp</dimen>
+    <dimen name="list_item_single_line_icon_text_margin">32dp</dimen>
+    <dimen name="list_item_single_line_image_height">72dp</dimen>
+
+
+    <dimen name="list_item_double_line_height">64dp</dimen>
+    <dimen name="list_item_double_line_icon_height">72dp</dimen>
+    <dimen name="list_item_double_line_image_height">72dp</dimen>
+
+    <dimen name="list_item_three_line_height">88dp</dimen>
+
+    <!-- applayout -->
+    <dimen name="app_layout_height">128dp</dimen>
+    <dimen name="app_layout_title_left_margin">32dp</dimen>
+    <dimen name="app_layout_spacing_top">16dp</dimen>
+    <dimen name="app_layout_spacing_bottom">28dp</dimen>
+    <dimen name="app_layout_text_size_title">24dp</dimen>
+
+
+</resources>

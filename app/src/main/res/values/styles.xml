@@ -34,6 +34,12 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="AppCompatTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/text_size_content</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
     <style name="AppCompatButton" parent="Widget.AppCompat.Button">
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>

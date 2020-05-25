@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat
 import com.aboust.develop_guide.R
 import com.aboust.develop_guide.service.DownloadRequest
 import com.aboust.develop_guide.service.DownloadService
-import com.aboust.develop_guide.service.OnDownload
 import com.aboust.develop_guide.widget.toast
 import com.afollestad.recyclical.ViewHolder
 import com.afollestad.recyclical.datasource.dataSourceTypedOf
@@ -19,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.common_toolbar.*
 import java.io.File
 
-data class Item(val id: Long, val icon: String?, val name: String, val clazz: Class<*>)
+data class Item(val id: Number, val icon: String?, val name: String, val clazz: Class<*>)
 
 
 class ItemViewHolder(itemView: View) : ViewHolder(itemView) {

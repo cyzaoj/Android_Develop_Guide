@@ -97,7 +97,7 @@ dependencies {
     implementation deps.utils.prdownloader
     implementation deps.utils.notify
     implementation deps.utils.link_builder
-
+    implementation deps.utils.bga_qrcode_zbar
     implementation library.tencent.wechat
 
 
