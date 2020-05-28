@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.widget.initjob
+package com.aboust.develop_guide.kit.initjob
 
 import java.util.concurrent.*
 import java.util.concurrent.atomic.AtomicInteger

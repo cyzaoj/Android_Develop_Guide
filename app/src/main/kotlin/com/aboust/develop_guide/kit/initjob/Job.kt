@@ -1,4 +1,4 @@
-package com.aboust.develop_guide.widget.initjob
+package com.aboust.develop_guide.kit.initjob
 
 import android.os.Process
 import java.util.concurrent.CountDownLatch

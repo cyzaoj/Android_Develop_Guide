@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.multidex.MultiDexApplication
 import com.aboust.develop_guide.kit.fetch.Fetch
 import com.aboust.develop_guide.ui.activity.UmbrellaActivity
-import com.aboust.develop_guide.widget.initjob.JobLaunch
+import com.aboust.develop_guide.kit.initjob.JobLaunch
 import timber.log.Timber
 
 
