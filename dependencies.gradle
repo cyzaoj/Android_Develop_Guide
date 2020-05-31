@@ -110,6 +110,22 @@ deps.fresco = fresco
 def iconics = [:]
 iconics.core = 'com.mikepenz:iconics-core:5.0.3'
 iconics.views = 'com.mikepenz:iconics-views:5.0.3'
+iconics.typeface_google_material = 'com.mikepenz:google-material-typeface:3.0.1.4.original-kotlin@aar'
+iconics.typeface_material_design = 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'
+iconics.typeface_fontawesome = 'com.mikepenz:fontawesome-typeface:5.9.0.0-kotlin@aar'
+iconics.typeface_octicons = 'com.mikepenz:octicons-typeface:3.2.0.6-kotlin@aar'
+iconics.typeface_meteocons = 'com.mikepenz:meteocons-typeface:1.1.0.5-kotlin@aar'
+iconics.typeface_community_material = 'com.mikepenz:community-material-typeface:5.0.45.1-kotlin@aar'
+iconics.typeface_weather = 'com.mikepenz:weather-icons-typeface:2.0.10.5-kotlin@aar'
+iconics.typeface_typeicons = 'com.mikepenz:typeicons-typeface:2.0.7.5-kotlin@aar'
+iconics.typeface_entypo = 'com.mikepenz:entypo-typeface:1.0.0.5-kotlin@aar'
+iconics.typeface_devicon = 'com.mikepenz:devicon-typeface:2.0.0.5-kotlin@aar'
+iconics.typeface_foundation = 'com.mikepenz:foundation-icons-typeface:3.0.0.5-kotlin@aar'
+iconics.typeface_ionicons = 'com.mikepenz:ionicons-typeface:2.0.1.5-kotlin@aar'
+iconics.typeface_pixeden_7_stroke = 'com.mikepenz:pixeden-7-stroke-typeface:1.2.0.3-kotlin@aar'
+iconics.typeface_material_design_dx = 'com.mikepenz:material-design-icons-dx-typeface:5.0.1.0-kotlin@aar'
+iconics.string_generator = 'ru.ztrap.iconics:string-generator:1.0.8'
+
 deps.iconics = iconics
 
 

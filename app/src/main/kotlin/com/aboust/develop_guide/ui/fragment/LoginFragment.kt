@@ -18,7 +18,6 @@ import timber.log.Timber
 
 class LoginFragment : Fragment() {
 
-
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,

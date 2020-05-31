@@ -8,8 +8,10 @@ import java.util.concurrent.ExecutorService
 abstract class Job : InitialJob {
     @Volatile
     private var isWaiting = false // 是否正在等待
+
     @Volatile
     private var isRunning = false // 是否正在执行
+
     @Volatile
     private var isFinished = false // Task是否执行完成
 

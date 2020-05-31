@@ -2,6 +2,8 @@
     <string name="app_name">Android_Develop_Guide</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="qr_code">二维码</string>
+
 
     <string name="notification">消息通知</string>
     <string name="_default">默认</string>

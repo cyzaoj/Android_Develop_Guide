@@ -82,6 +82,7 @@ dependencies {
 
     implementation deps.iconics.core
     implementation deps.iconics.views
+    implementation deps.iconics.views
 
 
     implementation deps.squareup.okhttp
@@ -105,6 +106,9 @@ dependencies {
 
     implementation deps.utils.free_proguard
     implementation deps.utils.timber
+
+
+//    testImplementation deps.iconics.string_generator
     testImplementation deps.test.junit
     androidTestImplementation deps.test.junit_test_ext
     androidTestImplementation deps.test.androidx_test_espresso

@@ -7,7 +7,7 @@ import java.util.*
  * 有向无环图的拓扑排序算法
  */
 class Graph(
-//顶点数
+    //顶点数
         private val verticeCount: Int) {
     //邻接表
     private val vector: Array<MutableList<Int>?> = arrayOfNulls(verticeCount)

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_umbrella.*
 
 class UmbrellaActivity : BaseActivity() {
     private val dataSource = dataSourceTypedOf(
-            Item(1, "二维码", CodeScanActivity::class.java, R.mipmap.ic_launcher)
+            Item(1, getString(R.string.qr_code), CodeScanActivity::class.java, R.mipmap.ic_launcher)
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

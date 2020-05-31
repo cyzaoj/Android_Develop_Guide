@@ -10,7 +10,12 @@ import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicInteger
 
-
+/**
+ *
+ * 参考：
+ * https://www.jianshu.com/p/ae0884e83c55
+ * https://github.com/smartzheng/asyncstarter
+ */
 open class JobLaunch private constructor() {
 
     private var startTime: Long = 0

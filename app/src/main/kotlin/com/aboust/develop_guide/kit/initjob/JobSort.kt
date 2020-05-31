@@ -6,7 +6,9 @@ import timber.log.Timber
 
 
 object JobSort {
-    private val S_NEW_TASKS_HIGH: MutableList<Job> = ArrayList() // 高优先级的Task
+
+    // 高优先级的Task
+    private val S_NEW_TASKS_HIGH: MutableList<Job> = ArrayList()
 
     /**
      * 任务的有向无环图的拓扑排序
