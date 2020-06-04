@@ -19,7 +19,7 @@ class OnDialogActivity : BaseActivity() {
 
             onDialog
                     .layout(R.layout.dialog_confirm).with()
-                    .cancel(R.id.tv_cancel)
+                    .cancel(R.id.action_1)
                     .show()
 
         }

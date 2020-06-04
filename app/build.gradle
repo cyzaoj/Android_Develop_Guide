@@ -82,7 +82,7 @@ dependencies {
 
     implementation deps.iconics.core
     implementation deps.iconics.views
-    implementation deps.iconics.views
+    implementation deps.iconics.typeface_material_design
 
 
     implementation deps.squareup.okhttp
@@ -97,8 +97,8 @@ dependencies {
     implementation deps.utils.fire_crasher
     implementation deps.utils.prdownloader
     implementation deps.utils.notify
-    implementation deps.utils.link_builder
     implementation deps.utils.bga_qrcode_zbar
+    implementation deps.utils.fire_crasher
     implementation library.tencent.wechat
 
 

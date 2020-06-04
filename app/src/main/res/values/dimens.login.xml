@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fragment_account_login_rootView_marginHorizontal">24dp</dimen>
+    <dimen name="fragment_account_login_edit_icon">7dp</dimen>
+    <dimen name="fragment_account_login_edit_icon_padding">15dp</dimen>
+    <dimen name="fragment_account_login_oauth_icon_size">75dp</dimen>
+
+    <dimen name="fragment_account_login_title_marginTop">46dp</dimen>
+    <dimen name="fragment_account_login_sub_title_marginTop">9dp</dimen>
+    <dimen name="fragment_account_login_username_marginTop">60dp</dimen>
+    <dimen name="fragment_account_login_password_marginTop">22dp</dimen>
+    <dimen name="fragment_account_login_submit_button_width">250dp</dimen>
+    <dimen name="fragment_account_login_edit_padding_horizontal">9dp</dimen>
+    <dimen name="fragment_account_login_divide_margin_horizontal">12dp</dimen>
+    <dimen name="fragment_account_login_divide_height">2dp</dimen>
+
+</resources>

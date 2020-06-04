@@ -1,6 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="fragment_login_rootView_marginHorizontal">24dp</dimen>
-
-
 </resources>

@@ -4,6 +4,7 @@ import android.content.Context
 import com.aboust.develop_guide.kit.initjob.Job
 import com.mikepenz.iconics.Iconics
 import com.mikepenz.iconics.typeface.GenericFont
+import com.mikepenz.iconics.typeface.library.materialdesigniconic.MaterialDesignIconic
 
 class FontJob(private val context: Context) : Job() {
 
@@ -12,17 +13,19 @@ class FontJob(private val context: Context) : Job() {
 
     //是否需要运行在主线程
     override fun onMainThread(): Boolean = false
+
     override fun run() {
 //        Iconics.registerFont(SiTypeface)
 
+        Iconics.registerFont(MaterialDesignIconic)
         //Generic font creation process
         GenericFont("ADG", "adg", "adg", "fonts/iconfont.ttf")
                 .also {
-                    it.registerIcon("zhifubao1", '\ue800')
+                    it.registerIcon("zhifubao_default", '\ue637')
                     it.registerIcon("wechat", '\ue619')
                     it.registerIcon("weixin", '\ue69d')
                     it.registerIcon("saoma", '\ue62c')
-                    it.registerIcon("zhifubaozhanghu", '\ue60b')
+                    it.registerIcon("zhifubao", '\ue60b')
                     Iconics.registerFont(it)
                 }
 

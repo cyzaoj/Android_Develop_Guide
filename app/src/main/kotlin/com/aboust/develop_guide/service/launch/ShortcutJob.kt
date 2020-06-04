@@ -13,7 +13,6 @@ import com.aboust.develop_guide.ui.activity.UmbrellaActivity
 import timber.log.Timber
 
 
-
 class ShortcutJob(private val context: Context) : Job() {
 
 
@@ -22,10 +21,7 @@ class ShortcutJob(private val context: Context) : Job() {
 
     //是否需要运行在主线程
     override fun onMainThread(): Boolean = false
-    override fun run() {
-
-        addShortcut()
-    }
+    override fun run() = addShortcut()
 
 
     private fun addShortcut() {

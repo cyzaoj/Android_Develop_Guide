@@ -31,7 +31,7 @@
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColor">@color/textColorPrimary</item>
-        <item name="android:gravity">center</item>
+<!--        <item name="android:gravity">center</item>-->
     </style>
 
     <style name="AppCompatTextView" parent="Widget.AppCompat.TextView">

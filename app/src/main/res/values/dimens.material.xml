@@ -6,6 +6,7 @@
     <dimen name="text_size_title">17sp</dimen>
     <dimen name="text_size_sub_title">14sp</dimen>
     <dimen name="text_size_content">13sp</dimen>
+    <dimen name="text_size_action">14sp</dimen>
     <dimen name="text_size_small">11sp</dimen>
     <dimen name="radius">4dp</dimen>
     <dimen name="logo_size">45dp</dimen>
@@ -29,20 +30,20 @@
     <dimen name="toolbar_text_size_sub_title">15sp</dimen>
 
 
+    <!-- dialog 样式  -->
     <dimen name="dialog_width">280dp</dimen>
-    <dimen name="dialog_title_height">40dp</dimen>
-    <dimen name="dialog_padding_horizontal">24dp</dimen>
-    <dimen name="dialog_content_top">36dp</dimen>
-    <dimen name="dialog_content_margin_bottom">28dp</dimen>
-    <dimen name="dialog_content_icon_size">40dp</dimen>
-    <dimen name="dialog_content_radio_size">24dp</dimen>
-    <dimen name="dialog_content_icon_spacing_item">32dp</dimen>
-
+    <dimen name="dialog_container_horizontal_spacing">24dp</dimen>
     <dimen name="dialog_actions_height">52dp</dimen>
-    <dimen name="dialog_actions_padding">8dp</dimen>
-    <dimen name="dialog_actions_button_height">36dp</dimen>
-    <dimen name="dialog_actions_button_spacing_vertical">12dp</dimen>
-    <dimen name="dialog_actions_button_margin_horizontal">8dp</dimen>
+    <dimen name="dialog_actions_view_margin">8dp</dimen>
+
+    <dimen name="dialog_confirm_title_height">40dp</dimen>
+    <dimen name="dialog_confirm_content_marginTop">26dp</dimen>
+    <!--    <dimen name="dialog_confirm_content_marginTop">36dp</dimen>-->
+    <dimen name="dialog_confirm_content_marginBottom">28dp</dimen>
+
+
+    <dimen name="dialog_alert_title_height">38dp</dimen>
+    <dimen name="dialog_alert_title_marginBottom">28dp</dimen>
 
 
     <dimen name="list_item_spacing_horizontal">16dp</dimen>

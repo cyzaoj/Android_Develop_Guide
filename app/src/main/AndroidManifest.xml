@@ -44,6 +44,7 @@
         <activity android:name=".ui.activity.CodeScanActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

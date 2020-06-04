@@ -14,8 +14,8 @@
 
     <com.mikepenz.iconics.view.IconicsImageView
         android:id="@+id/icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="47dp"
+        android:layout_height="47dp"
         android:layout_centerHorizontal="true"
         app:iiv_color="@android:color/holo_red_dark"
         app:iiv_icon="gmd-favorite" />

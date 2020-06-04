@@ -3,6 +3,7 @@ package com.aboust.develop_guide
 import androidx.multidex.MultiDexApplication
 import com.aboust.develop_guide.kit.fetch.Fetch
 import com.aboust.develop_guide.kit.initjob.JobLaunch
+import com.aboust.develop_guide.service.launch.AppStarter
 import com.aboust.develop_guide.service.launch.FontJob
 import com.aboust.develop_guide.service.launch.ShortcutJob
 
@@ -18,6 +19,7 @@ class MainApplication : MultiDexApplication() {
             val self = this@MainApplication
             add(ShortcutJob(self))
             add(FontJob(self))
+            add(AppStarter(self))
             start()
             await()
         }
