@@ -22,16 +22,16 @@
 
     <!-- toolbar菜单样式 -->
     <style name="Toolbar.Theme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
-        <!--        <item name="actionMenuTextColor">@android:color/white</item>-->
-        <!--        <item name="minHeight">?attr/actionBarSize</item>-->
-        <item name="minHeight">@dimen/toolbar_height</item>
+        <!--     <item name="actionMenuTextColor">@android:color/white</item>-->
+        <item name="minHeight">?attr/actionBarSize</item>
+        <!--     <item name="minHeight">@dimen/toolbar_height</item>-->
         <!--     <item name="android:paddingLeft">@dimen/toolbar_spacing_horizontal</item>-->
-        <item name="android:paddingRight">@dimen/toolbar_spacing_horizontal</item>
+<!--        <item name="android:paddingRight">@dimen/toolbar_spacing_horizontal</item>-->
         <item name="android:elevation">@dimen/toolbar_elevation</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="android:background">@color/colorPrimary</item>
-        <item name="android:textColor">@color/textColorPrimary</item>
-<!--        <item name="android:gravity">center</item>-->
+        <item name="android:textColor">@color/textColorSecondary</item>
+        <!--        <item name="android:gravity">center</item>-->
     </style>
 
     <style name="AppCompatTextView" parent="Widget.AppCompat.TextView">

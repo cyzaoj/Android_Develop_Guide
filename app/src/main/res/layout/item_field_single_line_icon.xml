@@ -2,34 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/list_item_single_line_icon_height"
-    android:paddingHorizontal="@dimen/list_item_spacing_horizontal">
+    android:layout_height="@dimen/list_item_one_line_height">
 
     <com.mikepenz.iconics.view.IconicsImageView
-        android:id="@+id/item_icon"
-        android:layout_width="@dimen/list_item_single_line_icon_size"
-        android:layout_height="@dimen/list_item_single_line_icon_size"
+        android:id="@+id/icon"
+        android:layout_width="@dimen/list_item_one_line_icon_size"
+        android:layout_height="@dimen/list_item_one_line_icon_size"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/list_item_one_line_item_spacing_horizontal"
         app:iiv_icon="gmi_google" />
 
     <TextView
-        android:id="@+id/item_text"
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/item_action"
         android:layout_centerVertical="true"
-        android:layout_marginStart="@dimen/list_item_single_line_icon_text_margin"
-        android:layout_toEndOf="@+id/item_icon"
+        android:layout_marginStart="@dimen/list_item_one_line_icon_content_margin"
+        android:layout_marginEnd="@dimen/list_item_one_line_item_spacing_horizontal"
+        android:layout_toStartOf="@+id/action"
+        android:layout_toEndOf="@+id/icon"
         android:textColor="@color/textColorPrimary"
         android:textSize="@dimen/text_size_sub_title" />
 
 
     <com.mikepenz.iconics.view.IconicsImageView
-        android:id="@+id/item_action"
-        android:layout_width="@dimen/list_item_single_line_icon_size"
-        android:layout_height="@dimen/list_item_single_line_icon_size"
+        android:id="@+id/action"
+        android:layout_width="@dimen/list_item_one_line_small_icon_size"
+        android:layout_height="@dimen/list_item_one_line_small_icon_size"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/list_item_one_line_item_spacing_horizontal"
         app:iiv_icon="gmi_arrow-right" />
 </RelativeLayout>

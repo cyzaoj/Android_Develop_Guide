@@ -1,5 +1,6 @@
 package com.aboust.develop_guide.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.Gravity
@@ -11,10 +12,12 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aboust.develop_guide.R
+import com.aboust.develop_guide.ui.activity.MainActivity
 import com.aboust.develop_guide.widget.OnDialog
 import com.aboust.develop_guide.widget.RichText
 import com.aboust.develop_guide.widget.recyclerview.LinearLayoutOffsetsItemDecoration
@@ -107,6 +110,9 @@ class AccountLoginFragment : Fragment() {
                                 loading.visibility = View.VISIBLE
                                 Handler().postDelayed({
                                     loading.visibility = View.GONE
+
+                                    val i = Intent(requireContext(), MainActivity::class.java)
+                                    ContextCompat.startActivity(requireContext(), i, null)
                                 }, 3000)
                             }
                         }

@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
  * This class can only be used in the RecyclerView which use a LinearLayoutManager or
  * its subclass.
  */
-class LinearLayoutOffsetsItemDecoration(@field:Orientation @param:Orientation private var mOrientation: Int) : ItemDecoration() {
+class LinearLayoutOffsetsItemDecoration(@field:Orientation private var mOrientation: Int) : ItemDecoration() {
     private val mTypeOffsetsFactories = SparseArray<OffsetsCreator>()
 
     @IntDef(LINEAR_OFFSETS_HORIZONTAL, LINEAR_OFFSETS_VERTICAL)
@@ -24,7 +24,7 @@ class LinearLayoutOffsetsItemDecoration(@field:Orientation @param:Orientation pr
     private var mItemOffsets = 0
     private var mIsOffsetEdge = true
     private var mIsOffsetLast = true
-    fun setOrientation(@Orientation orientation: Int) {
+    fun orientation(@Orientation orientation: Int) {
         mOrientation = orientation
     }
 

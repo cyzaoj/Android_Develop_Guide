@@ -46,28 +46,13 @@
     <dimen name="dialog_alert_title_marginBottom">28dp</dimen>
 
 
-    <dimen name="list_item_spacing_horizontal">16dp</dimen>
-    <dimen name="list_item_single_line_height">48dp</dimen>
-    <dimen name="list_item_single_line_icon_size">20dp</dimen>
-    <dimen name="list_item_single_line_icon_height">56dp</dimen>
-    <dimen name="list_item_single_line_icon_margin_vertical">8dp</dimen>
-    <dimen name="list_item_single_line_text_margin_vertical">16dp</dimen>
-    <dimen name="list_item_single_line_icon_text_margin">32dp</dimen>
-    <dimen name="list_item_single_line_image_height">72dp</dimen>
+    <dimen name="list_item_one_line_rootView_spacing_margin_vertical">8dp</dimen>
+    <dimen name="list_item_one_line_height">56dp</dimen>
+    <dimen name="list_item_one_line_item_spacing_horizontal">16dp</dimen>
+    <dimen name="list_item_one_line_icon_content_margin">32dp</dimen>
+    <dimen name="list_item_one_line_icon_size">40dp</dimen>
+    <dimen name="list_item_one_line_small_icon_size">20dp</dimen>
 
-
-    <dimen name="list_item_double_line_height">64dp</dimen>
-    <dimen name="list_item_double_line_icon_height">72dp</dimen>
-    <dimen name="list_item_double_line_image_height">72dp</dimen>
-
-    <dimen name="list_item_three_line_height">88dp</dimen>
-
-    <!-- applayout -->
-    <dimen name="app_layout_height">128dp</dimen>
-    <dimen name="app_layout_title_left_margin">32dp</dimen>
-    <dimen name="app_layout_spacing_top">16dp</dimen>
-    <dimen name="app_layout_spacing_bottom">28dp</dimen>
-    <dimen name="app_layout_text_size_title">24dp</dimen>
 
 
 </resources>

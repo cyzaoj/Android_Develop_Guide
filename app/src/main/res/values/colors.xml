@@ -10,7 +10,7 @@
     <color name="navigationBarColor">#03DAC5</color>
     <color name="statusBarColor">@android:color/transparent</color>
     <color name="divider">#BDBDBD</color>
-    <color name="icons">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
 
 
     <color name="colorNormal">#EF5B47</color>

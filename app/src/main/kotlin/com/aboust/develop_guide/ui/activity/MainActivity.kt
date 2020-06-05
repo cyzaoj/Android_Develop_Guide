@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.aboust.develop_guide.R
 import com.aboust.develop_guide.service.DownloadRequest
 import com.aboust.develop_guide.service.DownloadService
@@ -22,7 +23,7 @@ data class Item(val id: Number, val icon: String?, val name: String, val clazz: 
 
 
 class ItemViewHolder(itemView: View) : ViewHolder(itemView) {
-    val name: TextView = itemView.findViewById(R.id.item_text)
+    val name: TextView = itemView.findViewById(R.id.title)
 }
 
 class MainActivity : BaseActivity() {
@@ -41,6 +42,8 @@ class MainActivity : BaseActivity() {
 
     private fun views() {
         toolbar_left.visibility = View.INVISIBLE
+
+        rv_apis.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         rv_apis.setup {
             withDataSource(dataSource)
             val self = this@MainActivity
@@ -54,8 +57,8 @@ class MainActivity : BaseActivity() {
                 onLongClick { index -> "Long clicked $index: ${item.name}".toast(self) }
             }
         }
-        val request = DownloadRequest("https://ihomefnt.oss-cn-hangzhou.aliyuncs.com/aihome.screen_v1.0.7.apk")
-                .destinationUri(Uri.fromFile(File(this.cacheDir, "temp.apk")))
-        DownloadService.start(this, request)
+//        val request = DownloadRequest("https://ihomefnt.oss-cn-hangzhou.aliyuncs.com/aihome.screen_v1.0.7.apk")
+//                .destinationUri(Uri.fromFile(File(this.cacheDir, "temp.apk")))
+//        DownloadService.start(this, request)
     }
 }

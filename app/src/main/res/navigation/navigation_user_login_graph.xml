@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_user_login_graph"
-    app:startDestination="@id/fragment_user_login">
+    app:startDestination="@id/fragment_captcha">
 
     <fragment
         android:id="@+id/fragment_user_login"
         android:name="com.aboust.develop_guide.ui.fragment.AccountLoginFragment"
-        android:label="LoginFragment"
+        android:label="account_login_fragment"
+        tools:layout="@layout/fragment_account_login" />
+
+    <fragment
+        android:id="@+id/fragment_captcha"
+        android:name="com.aboust.develop_guide.ui.fragment.CaptchaFragment"
+        android:label="captcha_fragment"
         tools:layout="@layout/fragment_account_login" />
 
 </navigation>
