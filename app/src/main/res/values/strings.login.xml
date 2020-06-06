@@ -17,4 +17,10 @@
     <string name="fragment_account_login_sub_title">还没有账户，立即注册</string>
     <string name="or">你也可以用以下登录方式</string>
 
+
+    <string name="fragment_captcha_prompt">请输入验证码</string>
+    <string name="fragment_captcha_description">验证码已发送至%s </string>
+    <string name="re_send_captcha_code">%s 后重新发送</string>
+    <string name="re_send_captcha_action">重新发送</string>
+
 </resources>

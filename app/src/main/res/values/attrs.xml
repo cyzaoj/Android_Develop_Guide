@@ -2,7 +2,7 @@
 <resources>
 
     <!-- 自定义验证码输入框-->
-    <declare-styleable name="code_box_view">
+    <declare-styleable name="BoxInputView">
         <!--输入框的数量-->
         <attr name="box_count" format="integer" />
         <!--输入类型-->
@@ -20,6 +20,7 @@
         <attr name="box_text_size" format="dimension|reference" />
         <!--输入框背景-->
         <attr name="box_background" format="reference" />
+        <attr name="typeface_assets" format="string" />
         <!--光标样式-->
         <attr name="box_cursor" format="reference" />
         <!--是否隐藏光标-->

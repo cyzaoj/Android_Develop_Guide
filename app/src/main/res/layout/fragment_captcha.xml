@@ -1,19 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.aboust.develop_guide.widget.InputCodeView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:box_count="4"
-        app:box_size="40dp"
-        app:box_text_color="@color/colorPressed"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <include
+        layout="@layout/common_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/AppCompatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="37dp"
+        android:text="@string/fragment_captcha_prompt"
+        android:textSize="@dimen/text_size_title_b"
+        app:layout_constraintBottom_toTopOf="@+id/description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/description"
+        style="@style/AppCompatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_captcha_description"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="@dimen/text_size_content"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <com.aboust.develop_guide.widget.BoxInputView
+        android:id="@+id/box_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:box_count="5"
+        app:box_size="49dp"
+        app:box_spacing="22dp"
+        app:box_text_color="@color/colorPressed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@+id/description"
+        app:layout_constraintVertical_bias="0.1" />
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/restart_time"
+        style="@style/AppCompatTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/re_send_captcha_code"
+        android:textColor="@color/textColorSecondary"
+        android:textSize="@dimen/text_size_content"
+        app:layout_constraintStart_toStartOf="@id/box_code"
+        app:layout_constraintTop_toBottomOf="@id/box_code" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,9 +1,9 @@
 package com.aboust.develop_guide.widget
 
-import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
@@ -12,7 +12,6 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
@@ -20,11 +19,17 @@ import android.view.View.OnFocusChangeListener
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.marginBottom
+import androidx.core.view.marginEnd
+import androidx.core.view.marginStart
+import androidx.core.view.marginTop
 import com.aboust.develop_guide.R
+import timber.log.Timber
 
 
-class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChangeListener {
+class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChangeListener {
 
+    val TAG: String = this::class.java.simpleName
 
     var onTextChangeListener: OnTextChangeListener? = null
 
@@ -36,12 +41,14 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
     /**
      * 输入框类型
      */
-    private var inputType: Types = Types.NUMBER
+    private var boxType: Types = Types.NUMBER
 
     /**
      * 输入框的宽度
      */
     private var boxSize: Int = 120
+
+    private var typeface: Typeface? = null
 
 
 //    /**
@@ -52,7 +59,7 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
     /**
      * 文字颜色
      */
-    private var textColor: Int = Color.BLACK
+    private var textColor: Int = Color.GRAY
 
     /**
      * 文字大小
@@ -67,17 +74,8 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
     /**
      * 输入框间距
      */
-    private var spacing = 0
+    private var boxMargin = 0F
 
-    /**
-     * 平分后的间距
-     */
-    private var boxBisectSpacing = 0
-
-    /**
-     * 判断是否平分
-     */
-    private var isBisect: Boolean = true
 
     /**
      * 是否显示光标
@@ -88,12 +86,6 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
      * 光标样式
      */
     private var cursorDrawable: Int = R.drawable.selector_edit_cursor
-
-
-//    /**
-//     * 输入框间距
-//     */
-//    private val viewMargin = 0
 
 
     enum class Types {
@@ -120,20 +112,20 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
     }
 
     private fun initView(attrs: AttributeSet?) {
-        @SuppressLint("CustomViewStyleable")
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.code_box_view)
-        val type = typedArray.getInt(R.styleable.code_box_view_box_type, Types.NUMBER.ordinal)
-        inputType = Types.values()[type]
-        count = typedArray.getInteger(R.styleable.code_box_view_box_count, 4)
-        boxSize = typedArray.getDimensionPixelSize(R.styleable.code_box_view_box_size, 120)
-        textColor = typedArray.getColor(R.styleable.code_box_view_box_text_color, Color.BLACK)
-        textSize = typedArray.getDimensionPixelSize(R.styleable.code_box_view_box_text_size, 16).toFloat()
-        boxBackground = typedArray.getResourceId(R.styleable.code_box_view_box_background, R.drawable.selector_edit_code)
-        cursorDrawable = typedArray.getResourceId(R.styleable.code_box_view_box_cursor, R.drawable.selector_edit_cursor)
-        cursorVisible = typedArray.getBoolean(R.styleable.code_box_view_box_cursor_visible, true)
-        isBisect = typedArray.hasValue(R.styleable.code_box_view_box_spacing)
-        if (isBisect) spacing = typedArray.getDimensionPixelSize(R.styleable.code_box_view_box_spacing, 0)
-        orientation = HORIZONTAL
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.BoxInputView)
+        val type = typedArray.getInt(R.styleable.BoxInputView_box_type, Types.NUMBER.ordinal)
+        boxType = Types.values()[type]
+        count = typedArray.getInteger(R.styleable.BoxInputView_box_count, 4)
+        boxSize = typedArray.getDimensionPixelSize(R.styleable.BoxInputView_box_size, 120)
+        textColor = typedArray.getColor(R.styleable.BoxInputView_box_text_color, Color.BLACK)
+        textSize = typedArray.getDimensionPixelSize(R.styleable.BoxInputView_box_text_size, 16).toFloat()
+        boxBackground = typedArray.getResourceId(R.styleable.BoxInputView_box_background, R.drawable.selector_edit_code)
+        cursorDrawable = typedArray.getResourceId(R.styleable.BoxInputView_box_cursor, R.drawable.selector_edit_cursor)
+        cursorVisible = typedArray.getBoolean(R.styleable.BoxInputView_box_cursor_visible, true)
+        boxMargin = typedArray.getDimension(R.styleable.BoxInputView_box_spacing, 0F)
+        val typefaceId = typedArray.getString(R.styleable.BoxInputView_typeface_assets)
+        if (null != typefaceId) typeface = Typeface.createFromAsset(this.resources.assets, typefaceId)
+//        orientation = HORIZONTAL
         addBox()
 
         //释放资源
@@ -163,7 +155,7 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
         editText.isCursorVisible = cursorVisible
         editText.maxLines = 1
         editText.filters = arrayOf<InputFilter>(LengthFilter(1))
-        when (inputType) {
+        when (boxType) {
             Types.NUMBER -> editText.inputType = InputType.TYPE_CLASS_NUMBER
             Types.NUMBER_PASSWORD -> {
                 editText.inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
@@ -188,27 +180,32 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
      */
     private fun getLayoutParams(index: Int): LayoutParams {
         val layoutParams = LayoutParams(boxSize, boxSize)
-        if (!isBisect) {
-            //平分Margin，把第一个EditText跟最后一个EditText的间距同设为平分
-            boxBisectSpacing = (width - count * boxSize) / (count + 1)
-            when (index) {
-                0 -> {
-                    layoutParams.leftMargin = boxBisectSpacing
-                    layoutParams.rightMargin = boxBisectSpacing / 2
-                }
-                count - 1 -> {
-                    layoutParams.leftMargin = boxBisectSpacing / 2
-                    layoutParams.rightMargin = boxBisectSpacing
-                }
-                else -> {
-                    layoutParams.leftMargin = boxBisectSpacing / 2
-                    layoutParams.rightMargin = boxBisectSpacing / 2
-                }
-            }
-        } else {
-            layoutParams.leftMargin = spacing / 2
-            layoutParams.rightMargin = spacing / 2
+        val margin = if (0F == this.boxMargin) boxSize / 4 else this.boxMargin.toInt()
+        if (0 != index) when (orientation) {
+            HORIZONTAL -> layoutParams.marginStart = margin
+            VERTICAL -> layoutParams.topMargin = margin
         }
+//        if (!isBisect) {
+//            //平分Margin，把第一个EditText跟最后一个EditText的间距同设为平分
+//            boxBisectSpacing = (width - count * boxSize) / (count + 1)
+//            when (index) {
+//                0 -> {
+//                    layoutParams.leftMargin = boxBisectSpacing
+//                    layoutParams.rightMargin = boxBisectSpacing / 2
+//                }
+//                count - 1 -> {
+//                    layoutParams.leftMargin = boxBisectSpacing / 2
+//                    layoutParams.rightMargin = boxBisectSpacing
+//                }
+//                else -> {
+//                    layoutParams.leftMargin = boxBisectSpacing / 2
+//                    layoutParams.rightMargin = boxBisectSpacing / 2
+//                }
+//            }
+//        } else {
+//            layoutParams.leftMargin = spacing / 2
+//            layoutParams.rightMargin = spacing / 2
+//        }
         layoutParams.gravity = Gravity.CENTER
         return layoutParams
     }
@@ -252,12 +249,25 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
         var lastWidth = 0
         when (specMode) {
             MeasureSpec.AT_MOST -> {
-                for (index in 0 until count) {
-                    val editText = getChildAt(index) as EditText
-                    val lp = editText.layoutParams
-                    lastWidth += lp.width
+                when (orientation) {
+                    VERTICAL -> {
+                        if (0 == lastWidth) lastWidth = specSize
+                        for (index in 0 until count) {
+                            val editText = getChildAt(index) as EditText
+                            val lp = editText.layoutParams
+                            val w = editText.marginStart + editText.marginEnd + lp.width
+                            lastWidth = w.coerceAtMost(lastWidth)
+                        }
+                    }
+                    HORIZONTAL -> {
+                        for (index in 0 until count) {
+                            val editText = getChildAt(index) as EditText
+                            val lp = editText.layoutParams
+                            lastWidth += lp.width + editText.marginStart + editText.marginEnd
+                        }
+                        lastWidth += paddingLeft + paddingRight
+                    }
                 }
-                lastWidth += paddingLeft + paddingRight
             }
             MeasureSpec.EXACTLY -> lastWidth = specSize
             MeasureSpec.UNSPECIFIED -> lastWidth = suggestedMinimumWidth.coerceAtLeast(specSize)
@@ -267,12 +277,32 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
     }
 
     private fun measureHeight(measureSpec: Int): Int {
-        var lastHeight = suggestedMinimumHeight
+        var lastHeight = 0
         val specMode = MeasureSpec.getMode(measureSpec)
         val specSize = MeasureSpec.getSize(measureSpec)
         when (specMode) {
             MeasureSpec.AT_MOST -> {
-                lastHeight = specSize
+                when (orientation) {
+                    VERTICAL -> {
+                        for (index in 0 until count) {
+                            val editText = getChildAt(index) as EditText
+                            val lp = editText.layoutParams
+                            lastHeight += editText.marginTop + editText.marginBottom + lp.height
+                        }
+                        lastHeight += paddingTop + paddingBottom
+                    }
+                    HORIZONTAL -> {
+                        if (0 == lastHeight) lastHeight = specSize
+                        for (index in 0 until count) {
+                            val editText = getChildAt(index) as EditText
+                            val lp = editText.layoutParams
+                            val h = editText.marginBottom + editText.marginTop + lp.height
+                            lastHeight = h.coerceAtMost(lastHeight)
+                        }
+                    }
+                }
+
+
             }
             MeasureSpec.EXACTLY -> lastHeight = specSize
             MeasureSpec.UNSPECIFIED -> lastHeight = suggestedMinimumWidth.coerceAtLeast(specSize)
@@ -280,6 +310,11 @@ class InputCodeView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChan
         return lastHeight
     }
 
+    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
+        super.onSizeChanged(w, h, oldw, oldh)
+        Timber.d("onSizeChanged -> w:$w h:$h old_w:$oldw old_h:$oldh")
+
+    }
 
     override fun onFocusChange(view: View, b: Boolean) {
         if (b) focus()
