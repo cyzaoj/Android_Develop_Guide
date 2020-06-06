@@ -131,7 +131,7 @@ class RichText(private val context: Context, text: CharSequence) : SpannableStri
     /**
      * 给target字串设置样式（粗斜体）
      */
-    fun bold_italic() = applySpan(Typeface.BOLD_ITALIC)
+    fun boldItalic() = applySpan(Typeface.BOLD_ITALIC)
 
     private fun RichText.applySpan(span: Int) = apply {
         rangeList.map { setSpan(StyleSpan(span), it.first, it.second, spanMode) }

@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.aboust.develop_guide.R
@@ -60,6 +61,10 @@ class AccountLoginFragment : Fragment() {
         titleView(view)
         editViews(view)
         submitView(view)
+
+        forget_password.setOnClickListener {
+            Navigation.findNavController(it).navigate(R.id.action_from_account_to_captcha)
+        }
         oauthView()
 
     }
@@ -104,21 +109,22 @@ class AccountLoginFragment : Fragment() {
                     .layout(R.layout.dialog_alert)
                     .with()
                     .cancel(R.id.action_1)
+                    .text(R.id.title, R.string.error_password)
                     .onClickListener(View.OnClickListener {
                         when (it.id) {
                             R.id.action_2 -> {
                                 loading.visibility = View.VISIBLE
+
                                 Handler().postDelayed({
                                     loading.visibility = View.GONE
-
                                     val i = Intent(requireContext(), MainActivity::class.java)
                                     ContextCompat.startActivity(requireContext(), i, null)
+                                    activity?.finish()
                                 }, 3000)
                             }
                         }
                     }, R.id.action_2)
                     .gravity(Gravity.CENTER, 0, 0)
-
                     .show()
         }
     }

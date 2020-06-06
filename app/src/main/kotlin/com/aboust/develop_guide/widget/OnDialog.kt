@@ -241,14 +241,16 @@ class OnDialog : Dialog {
 //    }
     /**
      * 设置监听
-     * @param onClickListener
+     * @param listener
      * @param viewIds
      */
-    fun onClickListener(onClickListener: View.OnClickListener, vararg viewIds: Int): OnDialog {
-        val lDialog: OnDialog = this
+    fun onClickListener(listener: View.OnClickListener?, vararg viewIds: Int, autoDismiss: Boolean = true): OnDialog {
         for (element in viewIds) {
             val el = getView<View>(element)
-            el.setOnClickListener { v -> onClickListener.onClick(v) }
+            el.setOnClickListener { v ->
+                listener?.onClick(v)
+                if (autoDismiss) this.dismiss()
+            }
         }
         return this
     }

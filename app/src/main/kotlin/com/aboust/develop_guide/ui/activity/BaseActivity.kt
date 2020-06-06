@@ -1,6 +1,5 @@
 package com.aboust.develop_guide.ui.activity
 
-
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {

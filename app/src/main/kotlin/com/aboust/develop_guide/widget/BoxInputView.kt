@@ -1,10 +1,8 @@
 package com.aboust.develop_guide.widget
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.os.Build
 import android.text.Editable
 import android.text.InputFilter
 import android.text.InputFilter.LengthFilter
@@ -29,9 +27,7 @@ import timber.log.Timber
 
 class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChangeListener {
 
-    val TAG: String = this::class.java.simpleName
-
-    var onTextChangeListener: OnTextChangeListener? = null
+    private var textChangeListener: OnTextChangeListener? = null
 
     /**
      * 输入框数量
@@ -141,7 +137,6 @@ class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChang
         }
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private fun editText(index: Int): EditText {
         val editText = EditText(context)
         editText.layoutParams = getLayoutParams(index)
@@ -238,7 +233,6 @@ class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChang
      */
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
         updateBoxMargin()
         setMeasuredDimension(measureWidth(widthMeasureSpec), measureHeight(heightMeasureSpec))
     }
@@ -324,10 +318,10 @@ class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChang
     override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     override fun afterTextChanged(s: Editable) {
         if (s.isNotEmpty()) focus()
-        onTextChangeListener?.onTextChange(this, result)
+        textChangeListener?.onTextChange(this, result)
         //如果最后一个输入框有字符，则返回结果
         val lastEditText = getChildAt(count - 1) as EditText
-        if (lastEditText.text.isNotEmpty()) onTextChangeListener?.onComplete(this, result)
+        if (lastEditText.text.isNotEmpty()) textChangeListener?.onComplete(this, result)
 
     }
 
@@ -382,12 +376,11 @@ class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChang
     }
 
     private val result: String
-        private get() {
+        get() {
             val stringBuffer = StringBuilder()
-            var editText: EditText
             for (i in 0 until count) {
-                editText = getChildAt(i) as EditText
-                stringBuffer.append(editText.text)
+                val v = getChildAt(i)
+                if (v is EditText) stringBuffer.append(v.text)
             }
             return stringBuffer.toString()
         }
@@ -408,13 +401,14 @@ class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChang
      * 清空验证码输入框
      */
     fun clear() {
-        var editText: EditText
         for (i in count - 1 downTo 0) {
-            editText = getChildAt(i) as EditText
-            editText.setText("")
-            if (i == 0) {
-                editText.isCursorVisible = cursorVisible
-                editText.requestFocus()
+            val view = getChildAt(i)
+            if (view is EditText) {
+                view.setText("")
+                if (i == 0) {
+                    view.isCursorVisible = cursorVisible
+                    view.requestFocus()
+                }
             }
         }
     }
@@ -439,19 +433,11 @@ class BoxInputView : LinearLayout, TextWatcher, View.OnKeyListener, OnFocusChang
 }
 
 class AsteriskPasswordTransformationMethod : PasswordTransformationMethod() {
-    override fun getTransformation(source: CharSequence, view: View): CharSequence {
-        return PasswordCharSequence(source)
-    }
-
+    override fun getTransformation(source: CharSequence, view: View): CharSequence = PasswordCharSequence(source)
     class PasswordCharSequence(private val mSource: CharSequence) : CharSequence {
-        override val length: Int
-            get() = mSource.length
-
+        override val length: Int get() = mSource.length
         override fun get(index: Int): Char = '•'
-
         override fun subSequence(startIndex: Int, endIndex: Int): CharSequence = mSource.subSequence(startIndex, endIndex)
-
     }
-
 }
 
