@@ -8,10 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -23,6 +23,7 @@ import com.aboust.develop_guide.widget.OnDialog
 import com.aboust.develop_guide.widget.RichText
 import com.aboust.develop_guide.widget.recyclerview.LinearLayoutOffsetsItemDecoration
 import com.aboust.develop_guide.widget.recyclerview.LinearLayoutOffsetsItemDecoration.Companion.LINEAR_OFFSETS_HORIZONTAL
+import com.aboust.develop_guide.widget.translateBottomInBottomOut
 import com.afollestad.recyclical.ViewHolder
 import com.afollestad.recyclical.datasource.dataSourceOf
 import com.afollestad.recyclical.setup
@@ -117,8 +118,9 @@ class AccountLoginFragment : Fragment() {
 
                                 Handler().postDelayed({
                                     loading.visibility = View.GONE
-                                    val i = Intent(requireContext(), MainActivity::class.java)
-                                    ContextCompat.startActivity(requireContext(), i, null)
+                                    val c = requireContext()
+                                    val i = Intent(c, MainActivity::class.java)
+                                    ContextCompat.startActivity(requireContext(), i, translateBottomInBottomOut(c).toBundle())
                                     activity?.finish()
                                 }, 3000)
                             }

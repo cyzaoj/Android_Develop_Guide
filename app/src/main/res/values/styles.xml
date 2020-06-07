@@ -5,6 +5,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAnimationStyle">@style/anim_fade</item>
     </style>
 
     <style name="AppTheme.NoTitle">
@@ -52,6 +54,14 @@
         <item name="colorControlNormal">@color/colorNormal</item>
         <item name="colorControlActivated">@color/colorPressed</item>
         <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
+
+
+    <style name="anim_fade" parent="@android:style/Animation.Activity">
+        <!-- <item name="android:activityOpenEnterAnimation">@anim/anim_fade_in</item>
+         <item name="android:activityOpenExitAnimation">@anim/anim_fade_out</item>
+         <item name="android:activityCloseEnterAnimation">@anim/anim_fade_in</item>
+         <item name="android:activityCloseExitAnimation">@anim/anim_fade_out</item>-->
     </style>
 
 </resources>

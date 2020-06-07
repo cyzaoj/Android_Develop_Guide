@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        android:fromAlpha:属性为动画起始时透明度
+        android:toAlpha:属性为动画结束时透明度
+        android:duration:动画持续时间,单位毫秒
+    -->
+    <alpha
+        android:duration="@integer/fade_duration"
+        android:fromAlpha="0"
+        android:startOffset="@integer/fade_duration"
+        android:toAlpha="1.0" />
+
+</set>
