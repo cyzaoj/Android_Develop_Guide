@@ -1,12 +1,11 @@
 <resources>
 
-    <string name="download_install">下载完成，请点击安装</string>
     <string name="_0_0_0">0.0.0</string>
 
-
-    <string name="upgrade">升级</string>
+    <string name="upgrade">立即升级</string>
     <string name="upgrade_ignore">忽略此版本</string>
     <string name="upgrade_background">后台更新</string>
     <string name="upgrade_new_version">版本更新啦！</string>
+    <string name="please_install_app">下载完成，请点击安装</string>
 
 </resources>

@@ -174,7 +174,7 @@ deps.utils = utils
 
 def test = [:]
 test.junit = 'junit:junit:4.13'
-test.junit_test_ext = 'androidx.test.ext:junit:1.1.2-beta02'
+test.junit_test_ext = 'androidx.test.ext:junit:1.1.2-rc01'
 test.androidx_test_runner = 'androidx.test:runner:1.3.0-rc01'
 test.androidx_test_espresso = 'androidx.test.espresso:espresso-core:3.3.0-rc01'
 deps.test = test
