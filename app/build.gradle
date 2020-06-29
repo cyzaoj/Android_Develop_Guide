@@ -15,6 +15,7 @@ android {
         versionCode 1
         versionName "1.0.0"
         multiDexEnabled true
+
         ndk {
             abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
         }
@@ -22,9 +23,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders = [
+                SENTRY_META_NAME : 'io.sentry.dsn',
+                SENTRY_META_URL  : 'https://beb023f0b8a64b249d4d97989627ef42@o237399.ingest.sentry.io/5300365',
+                TAG              : defaultConfig.versionName + '_' + defaultConfig.versionCode,
                 WEIXIN_APP_ID    : '',
                 WEIXIN_APP_SECRET: '',
-                APP_VERSION      : defaultConfig.versionName + '_' + defaultConfig.versionCode,
         ]
 
         packagingOptions {
@@ -64,16 +67,17 @@ dependencies {
     implementation deps.kotlin.reflect
     implementation deps.kotlin.coroutines_core
     implementation deps.kotlin.coroutines_android
+
     implementation deps.androidx.appcompat
     implementation deps.androidx.core_ktx
     implementation deps.androidx.multidex
     implementation deps.androidx.navigation_fragment
     implementation deps.androidx.navigation_ui
     implementation deps.androidx.lifecycle_extensions
-
-    implementation deps.google.material
     implementation deps.androidx.coordinatorlayout
     implementation deps.androidx.constraintlayout
+
+    implementation deps.google.material
 
     implementation deps.afollestad.assent_core
     implementation deps.afollestad.assent_coroutines
@@ -83,23 +87,24 @@ dependencies {
     implementation deps.iconics.views
     implementation deps.iconics.typeface_material_design
 
-
     implementation deps.squareup.okhttp
     implementation deps.squareup.okhttp_logging_interceptor
     implementation deps.squareup.retrofit2
     implementation deps.squareup.retrofit2_converter_gson
     implementation deps.coroutines.retrofit
 
-    implementation deps.utils.fire_crasher
     implementation deps.utils.prdownloader
-    implementation deps.utils.notify
     implementation deps.utils.bga_qrcode_zbar
-    implementation deps.utils.fire_crasher
     implementation library.tencent.wechat
+
+    implementation deps.ui.notify
+
+    implementation deps.aps.fire_crasher
+    implementation deps.aps.sentry
+    implementation deps.aps.timber
 
     debugImplementation deps.squareup.leakcanary
     implementation deps.utils.free_proguard
-    implementation deps.utils.timber
 
 
 //    testImplementation deps.iconics.string_generator

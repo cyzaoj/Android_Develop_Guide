@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.aboust.develop_guide.R
+import io.sentry.core.Sentry
 import timber.log.Timber
 
 
@@ -41,3 +42,4 @@ class LoginActivity : BaseActivity() {
         }
     }
 }
+

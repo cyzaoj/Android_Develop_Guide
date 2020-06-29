@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Android_Develop_Guide</string>
     <string name="login">登录</string>
@@ -26,6 +27,7 @@
     <string name="category">分类</string>
     <string name="finder">发现</string>
     <string name="about">我的</string>
+
 
 
 </resources>

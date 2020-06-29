@@ -1,5 +1,7 @@
 package com.aboust.develop_guide
 
+import android.content.Context
+import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication
 import com.aboust.develop_guide.kit.fetch.Fetch
 import com.aboust.develop_guide.kit.initjob.JobLaunch
@@ -26,6 +28,12 @@ class MainApplication : MultiDexApplication() {
         Fetch.INSTANCE.create(this)
 
     }
+
+/*
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        MultiDex.install(base)
+    }*/
 
 
     override fun onTerminate() {

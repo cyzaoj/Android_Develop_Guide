@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger
  * 参考：
  * https://www.jianshu.com/p/ae0884e83c55
  * https://github.com/smartzheng/asyncstarter
+ *
  */
 open class JobLaunch private constructor() {
 
@@ -93,9 +94,7 @@ open class JobLaunch private constructor() {
     }
 
     fun cancel() {
-        for (future in futures) {
-            future.cancel(true)
-        }
+        futures.forEach { it.cancel(true) }
     }
 
 

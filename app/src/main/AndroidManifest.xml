@@ -32,6 +32,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="${SENTRY_META_NAME}"
+            android:value="${SENTRY_META_URL}" />
+
         <activity android:name=".ui.activity.MainActivity">
             <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,8 +48,8 @@
         <activity android:name=".ui.activity.CodeScanActivity" />
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleTask">
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

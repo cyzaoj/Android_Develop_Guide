@@ -27,7 +27,7 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
 
     companion object {
         private const val PREFERENCES_KEY = "Environment"
-        private const val PREFERENCES_KEY_SELECTED_ENVIRONMENT = "Selected_Environment"
+        private const val PREFERENCES_KEY_SELECTED = "Selected_Environment"
         private const val SPLIT = '|'
         internal val None = Environment("None")
 
@@ -59,20 +59,12 @@ data class Environment(val name: String, val hosts: MutableMap<String, String> =
             edit().putString(environment.name, encoded).apply()
         }
 
-        fun getSharedPreferences(context: Context): SharedPreferences {
-            return context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE)
-        }
+        fun getSharedPreferences(context: Context): SharedPreferences = context.getSharedPreferences(PREFERENCES_KEY, Context.MODE_PRIVATE)
 
+        internal fun SharedPreferences.saveSelectedEnvironment(environment: Environment) = edit().putString(PREFERENCES_KEY_SELECTED, environment.encode()).apply()
 
-        internal fun SharedPreferences.saveSelectedEnvironment(environment: Environment) {
-            edit().putString(PREFERENCES_KEY_SELECTED_ENVIRONMENT, environment.encode()).apply()
-        }
-
-        internal fun SharedPreferences.getSelectedEnvironment(): Environment {
-            return getString(PREFERENCES_KEY_SELECTED_ENVIRONMENT, null)
-                    ?.run(Companion::decode)
-                    ?: None
-        }
+        internal fun SharedPreferences.getSelectedEnvironment(): Environment = getString(PREFERENCES_KEY_SELECTED, null)?.run(Companion::decode)
+                ?: None
     }
 
 }
